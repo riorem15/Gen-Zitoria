@@ -59,6 +59,41 @@ export const useStore = create((set, get) => ({
     chap_14: { isCompleted: false, progress: 0 },
   },
 
+  // Daily Quests & Badges
+  dailyQuests: [
+    { id: 1, title: 'Buka 1 Materi Baru', isCompleted: false, current: 0, target: 1 },
+    { id: 2, title: 'Jawab Benar 3 Soal', isCompleted: false, current: 0, target: 3 },
+    { id: 3, title: 'Selesaikan Flashcards', isCompleted: false, current: 0, target: 1 },
+  ],
+  unlockedBadges: [],
+
+  updateQuestProgress: (questId, increment = 1) => set((state) => {
+    const updatedQuests = state.dailyQuests.map(q => {
+      if (q.id === questId && !q.isCompleted) {
+        const newCurrent = q.current + increment;
+        const isCompleted = newCurrent >= q.target;
+        return { ...q, current: Math.min(newCurrent, q.target), isCompleted };
+      }
+      return q;
+    });
+
+    // Check for badge unlocks
+    const completedCount = updatedQuests.filter(q => q.isCompleted).length;
+    let newBadges = [...state.unlockedBadges];
+    if (completedCount === 3 && !newBadges.includes('Pahlawan Harian')) {
+      newBadges.push('Pahlawan Harian');
+    }
+
+    return { dailyQuests: updatedQuests, unlockedBadges: newBadges };
+  }),
+
+  unlockBadge: (badgeName) => set((state) => {
+    if (!state.unlockedBadges.includes(badgeName)) {
+      return { unlockedBadges: [...state.unlockedBadges, badgeName] };
+    }
+    return state;
+  }),
+
   // Database Sync Actions
   fetchStats: async () => {
     const { user } = get();
@@ -109,8 +144,7 @@ export const useStore = create((set, get) => ({
         [chapterId]: { isCompleted: true, progress: 100 }
       }
     }));
-    // Note: If you want to sync module progress, we'd need another table. 
-    // For now we just sync points and streak.
+    get().updateQuestProgress(1); // Misi 1: Buka/Selesaikan materi
   },
 
   addStreak: () => {
@@ -132,6 +166,10 @@ export const useStore = create((set, get) => ({
       zpdLevel: newLevel,
       bestStreak: newBestStreak
     });
+    
+    get().updateQuestProgress(2); // Misi 2: Jawab soal benar
+    if (newStreak >= 5) get().unlockBadge('Penguasa Streak');
+    if (newLevel === 3) get().unlockBadge('Master HOTS');
     
     // Sync after setting local state
     get().syncStats();

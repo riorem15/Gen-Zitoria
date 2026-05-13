@@ -5,6 +5,8 @@ import Sidebar from './components/layout/Sidebar';
 import BottomNav from './components/layout/BottomNav';
 import Home from './pages/Home';
 import MaterialsDashboard from './pages/MaterialsDashboard';
+import Flashcards from './pages/Flashcards';
+import Timeline from './pages/Timeline';
 import PlayZone from './pages/PlayZone';
 import Leaderboard from './pages/Leaderboard';
 import MaterialView from './pages/MaterialView';
@@ -85,6 +87,8 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/materi" element={<MaterialsDashboard />} />
+                    <Route path="/flashcards" element={<Flashcards />} />
+                    <Route path="/timeline" element={<Timeline />} />
                     <Route path="/material/:phaseId/:chapterId" element={<MaterialView />} />
                     <Route path="/play" element={<PlayZone />} />
                     <Route path="/leaderboard" element={<Leaderboard />} />

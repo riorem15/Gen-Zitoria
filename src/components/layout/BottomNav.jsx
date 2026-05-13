@@ -10,6 +10,7 @@ export default function BottomNav() {
   const navItems = [
     { path: '/', icon: 'home', label: 'Home' },
     { path: '/materi', icon: 'auto_stories', label: 'Materi' },
+    { path: '/flashcards', icon: 'style', label: 'Flashcards' },
     { path: '/play', icon: 'sports_esports', label: 'Evaluasi' },
     { path: '/leaderboard', icon: 'leaderboard', label: 'Rank' },
   ];

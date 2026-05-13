@@ -11,6 +11,8 @@ export default function Sidebar() {
   const menuItems = [
     { path: '/', label: 'Dashboard', icon: 'home' },
     { path: '/materi', label: 'Materi', icon: 'auto_stories' },
+    { path: '/timeline', label: 'Timeline', icon: 'history' },
+    { path: '/flashcards', label: 'Flashcards', icon: 'style' },
     { path: '/play', label: 'Evaluasi', icon: 'sports_esports' },
     { path: '/leaderboard', label: 'Leaderboard', icon: 'leaderboard' },
   ];

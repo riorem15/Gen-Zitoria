@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { historyPhases } from '../data/historyContent';
-import { Lock, Unlock, PlayCircle } from 'lucide-react';
+import { Lock, Unlock, PlayCircle, Target, CheckCircle2, Award } from 'lucide-react';
 import AIAnalysis from '../components/dashboard/AIAnalysis';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { moduleProgress, initialLevel } = useStore();
+  const { moduleProgress, initialLevel, dailyQuests, unlockedBadges } = useStore();
 
   const handleStartChapter = (phaseId, chapterId, isLocked) => {
     if (!isLocked) {
@@ -65,6 +65,49 @@ export default function Home() {
       </div>
 
       <AIAnalysis />
+
+      {/* Daily Quests Widget */}
+      <div className="glass-panel p-6 border-l-4 border-l-secondary relative overflow-hidden shadow-sm">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Target className="w-32 h-32" />
+        </div>
+        <div className="flex justify-between items-end mb-4 relative z-10">
+          <h3 className="text-xl font-bold flex items-center gap-2">
+            <Target className="w-5 h-5 text-secondary" /> Misi Harian
+          </h3>
+          <div className="text-xs font-bold opacity-60">Reset dalam 14:22:00</div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+          {dailyQuests.map(q => (
+            <div key={q.id} className="bg-surface/50 p-4 rounded-xl border border-glass-border flex flex-col gap-2">
+              <div className="flex justify-between items-start">
+                <span className={`font-bold text-sm ${q.isCompleted ? 'text-green-500' : 'text-on-surface'}`}>{q.title}</span>
+                {q.isCompleted && <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />}
+              </div>
+              <div className="w-full bg-glass-border h-1.5 rounded-full overflow-hidden mt-auto">
+                <div className={`h-full ${q.isCompleted ? 'bg-green-500' : 'bg-secondary'} transition-all`} style={{ width: \`${(q.current / q.target) * 100}%\` }}></div>
+              </div>
+              <div className="text-[10px] font-bold opacity-50 text-right">{q.current} / {q.target}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Badges Widget */}
+      {unlockedBadges.length > 0 && (
+        <div className="glass-panel p-6 border-t-4 border-t-orange-500 relative overflow-hidden">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <Award className="w-5 h-5 text-orange-500" /> Pencapaian Lencana
+          </h3>
+          <div className="flex flex-wrap gap-4">
+            {unlockedBadges.map((badge, idx) => (
+              <div key={idx} className="bg-orange-500/10 border border-orange-500/20 text-orange-500 font-bold text-sm px-4 py-2 rounded-xl flex items-center gap-2">
+                <Award className="w-4 h-4" /> {badge}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="space-y-12">
         {historyPhases.map((phase, pIndex) => {

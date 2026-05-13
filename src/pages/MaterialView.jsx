@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { historyPhases } from '../data/historyContent';
 import { useStore } from '../store/useStore';
-import { ArrowLeft, CheckCircle2, AlertTriangle, Play } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, AlertTriangle, Play, Pause, Volume2 } from 'lucide-react';
 
 export default function MaterialView() {
   const { phaseId, chapterId } = useParams();
@@ -12,6 +12,9 @@ export default function MaterialView() {
   const [phase, setPhase] = useState(null);
   const [chapter, setChapter] = useState(null);
   const [isLocked, setIsLocked] = useState(false);
+  
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     // Find phase and chapter
@@ -40,6 +43,15 @@ export default function MaterialView() {
     setIsLocked(locked);
   }, [phaseId, chapterId, moduleProgress, navigate]);
 
+  // Stop speech when leaving page
+  useEffect(() => {
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
   if (!chapter || !phase) return null;
 
   const isCompleted = moduleProgress[chapter.id]?.isCompleted;
@@ -50,6 +62,42 @@ export default function MaterialView() {
 
   const handleStartEvaluation = () => {
     navigate(`/play?chapter=${chapter.id}`);
+  };
+
+  const handleToggleSpeech = () => {
+    if (!('speechSynthesis' in window)) {
+      alert("Maaf, browser Anda tidak mendukung fitur suara.");
+      return;
+    }
+
+    if (isPlaying) {
+      if (isPaused) {
+        window.speechSynthesis.resume();
+        setIsPaused(false);
+      } else {
+        window.speechSynthesis.pause();
+        setIsPaused(true);
+      }
+    } else {
+      // Strip HTML tags for clean reading
+      const tmp = document.createElement("DIV");
+      tmp.innerHTML = chapter.content;
+      const textToRead = tmp.textContent || tmp.innerText || "";
+
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.lang = 'id-ID';
+      utterance.rate = 0.9; // Slightly slower for storytelling
+      
+      utterance.onend = () => {
+        setIsPlaying(false);
+        setIsPaused(false);
+      };
+      
+      window.speechSynthesis.cancel(); // Stop any ongoing
+      window.speechSynthesis.speak(utterance);
+      setIsPlaying(true);
+      setIsPaused(false);
+    }
   };
 
   return (
@@ -75,7 +123,24 @@ export default function MaterialView() {
                 </span>
               )}
             </div>
-            <h1 className="text-3xl md:text-5xl font-black">{chapter.title}</h1>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <h1 className="text-3xl md:text-5xl font-black">{chapter.title}</h1>
+              {!isLocked && (
+                <button 
+                  onClick={handleToggleSpeech}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border transition-all ${
+                    isPlaying && !isPaused 
+                      ? 'bg-primary/20 border-primary text-primary animate-pulse' 
+                      : 'bg-surface border-glass-border hover:bg-glass hover:text-primary'
+                  }`}
+                >
+                  {isPlaying && !isPaused ? <Pause className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                  <span className="font-bold text-sm">
+                    {isPlaying && !isPaused ? 'Jeda Kisah' : isPlaying && isPaused ? 'Lanjut Kisah' : 'Dengarkan Kisah'}
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
 
           {isLocked ? (
