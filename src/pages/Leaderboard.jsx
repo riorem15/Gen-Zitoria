@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useStore } from '../store/useStore';
 import { Trophy, Flame, User, Crown } from 'lucide-react';
 import { supabase } from '../lib/supabase';

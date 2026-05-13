@@ -1,4 +1,3 @@
-import React from 'react';
 import { historyPhases } from '../data/historyContent';
 import { Clock } from 'lucide-react';
 import { motion } from 'framer-motion';

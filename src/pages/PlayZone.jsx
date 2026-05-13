@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { historyQuizzes } from '../data/historyQuizzes';
-import { historyPhases } from '../data/historyContent';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame, CheckCircle2, XCircle, ArrowRight, Trophy, BookOpen } from 'lucide-react';
 
@@ -12,7 +11,7 @@ export default function PlayZone() {
   const queryParams = new URLSearchParams(location.search);
   const chapterId = queryParams.get('chapter');
 
-  const { streak, addStreak, resetStreak, points } = useStore();
+  const { streak, addStreak, resetStreak } = useStore();
   
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -85,7 +85,7 @@ export default function Home() {
                 {q.isCompleted && <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />}
               </div>
               <div className="w-full bg-glass-border h-1.5 rounded-full overflow-hidden mt-auto">
-                <div className={`h-full ${q.isCompleted ? 'bg-green-500' : 'bg-secondary'} transition-all`} style={{ width: \`${(q.current / q.target) * 100}%\` }}></div>
+                <div className={`h-full ${q.isCompleted ? 'bg-green-500' : 'bg-secondary'} transition-all`} style={{ width: `${(q.current / q.target) * 100}%` }}></div>
               </div>
               <div className="text-[10px] font-bold opacity-50 text-right">{q.current} / {q.target}</div>
             </div>

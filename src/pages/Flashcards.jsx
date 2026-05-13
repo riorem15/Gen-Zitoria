@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCcw, ThumbsUp, ThumbsDown, Layers } from 'lucide-react';
-import { questions } from '../data/questions';
+import { questionBank } from '../data/questions';
 import { useStore } from '../store/useStore';
+
+// Filter only PG questions outside component for stable reference
+const pgQuestions = questionBank.filter(q => q.type === 'pg' && Array.isArray(q.options));
 
 export default function Flashcards() {
   const { updateQuestProgress } = useStore();
-  const [cards, setCards] = useState([...questions].sort(() => 0.5 - Math.random()).slice(0, 10));
+  const [cards, setCards] = useState(() => [...pgQuestions].sort(() => 0.5 - Math.random()).slice(0, 10));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
@@ -22,7 +25,7 @@ export default function Flashcards() {
   };
 
   const resetGame = () => {
-    setCards([...questions].sort(() => 0.5 - Math.random()).slice(0, 10));
+    setCards(() => [...pgQuestions].sort(() => 0.5 - Math.random()).slice(0, 10));
     setCurrentIndex(0);
     setScore(0);
     setIsFlipped(false);
@@ -45,8 +48,7 @@ export default function Flashcards() {
     );
   }
 
-  const correctOptionIndex = currentCard.options.findIndex(opt => opt.isCorrect);
-  const correctAnswerText = currentCard.options[correctOptionIndex].text;
+  const correctAnswerText = currentCard.correctAnswer;
 
   return (
     <div className="max-w-md mx-auto space-y-6 pt-4 md:pt-10 pb-20 px-4">

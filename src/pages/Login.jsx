@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useStore } from '../store/useStore';
-import { LogIn } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUser, user } = useStore();
+  const { setUser } = useStore();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

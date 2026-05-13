@@ -1,0 +1,145 @@
+
+C:\Antigravity\Web\Zitora\src\App.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\components\AIMentor.jsx
+   1:8  error    'React' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-unused-vars
+  17:3  error    React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/rules-of-hooks
+  19:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  17 |   useEffect(() => {
+  18 |     if (userWrongAnswer) {
+> 19 |       setIsOpen(true);
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  20 |       generateHint();
+  21 |     }
+  22 |   }, [userWrongAnswer]);  react-hooks/set-state-in-effect
+  20:7  error    Error: Cannot access variable before it is declared
+
+`generateHint` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  18 |     if (userWrongAnswer) {
+  19 |       setIsOpen(true);
+> 20 |       generateHint();
+     |       ^^^^^^^^^^^^ `generateHint` accessed before it is declared
+  21 |     }
+  22 |   }, [userWrongAnswer]);
+  23 |
+
+  22 |   }, [userWrongAnswer]);
+  23 |
+> 24 |   const generateHint = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |     setIsLoading(true);
+     | ^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     try {
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^
+> 58 |     setIsLoading(false);
+     | ^^^^^^^^^^^^^^^^^^^^^^^
+> 59 |   };
+     | ^^^^^ `generateHint` is declared here
+  60 |
+  61 |   return (
+  62 |     <div className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50 flex flex-col items-end">                                 react-hooks/immutability
+  22:6  warning  React Hook useEffect has a missing dependency: 'generateHint'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+
+C:\Antigravity\Web\Zitora\src\components\dashboard\AIAnalysis.jsx
+   1:8   error  'React' is defined but never used                                           no-unused-vars
+   7:19  error  'bestStreak' is assigned a value but never used                             no-unused-vars
+  24:9   error  The value assigned to 'feedback' is not used in subsequent statements       no-useless-assignment
+  25:9   error  The value assigned to 'focus' is not used in subsequent statements          no-useless-assignment
+  26:9   error  The value assigned to 'accuracyText' is not used in subsequent statements   no-useless-assignment
+  27:9   error  The value assigned to 'accuracyColor' is not used in subsequent statements  no-useless-assignment
+
+C:\Antigravity\Web\Zitora\src\components\layout\BottomNav.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\components\layout\Header.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\components\layout\Sidebar.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\pages\Flashcards.jsx
+  1:8   error  'React' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               no-unused-vars
+  9:70  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+   7 | export default function Flashcards() {
+   8 |   const { updateQuestProgress } = useStore();
+>  9 |   const [cards, setCards] = useState([...questions].sort(() => 0.5 - Math.random()).slice(0, 10));
+     |                                                                      ^^^^^^^^^^^^^ Cannot call impure function
+  10 |   const [currentIndex, setCurrentIndex] = useState(0);
+  11 |   const [isFlipped, setIsFlipped] = useState(false);
+  12 |   const [score, setScore] = useState(0);  react-hooks/purity
+
+C:\Antigravity\Web\Zitora\src\pages\Home.jsx
+  88:126  error  Parsing error: Expecting Unicode escape sequence \uXXXX
+
+C:\Antigravity\Web\Zitora\src\pages\Leaderboard.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\pages\LevelSelection.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\pages\Login.jsx
+  1:8   error  'React' is defined but never used          no-unused-vars
+  5:10  error  'LogIn' is defined but never used          no-unused-vars
+  9:20  error  'user' is assigned a value but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\pages\MaterialView.jsx
+   1:8  error  'React' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         no-unused-vars
+  25:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  23 |     
+  24 |     const currentPhase = historyPhases[currentPhaseIndex];
+> 25 |     setPhase(currentPhase);
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  26 |     
+  27 |     const currentChapterIndex = currentPhase.chapters.findIndex(c => c.id === chapterId);
+  28 |     if (currentChapterIndex === -1) return navigate('/');  react-hooks/set-state-in-effect
+
+C:\Antigravity\Web\Zitora\src\pages\MaterialsDashboard.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\pages\PlayZone.jsx
+   1:8   error  'React' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    no-unused-vars
+   5:10  error  'historyPhases' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            no-unused-vars
+  15:43  error  'points' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          no-unused-vars
+  33:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  31 |   useEffect(() => {
+  32 |     if (chapterId && historyQuizzes[chapterId]) {
+> 33 |       setQuestions(historyQuizzes[chapterId]);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |       setCurrentIndex(0);
+  35 |       setSelectedOption(null);
+  36 |       setIsAnswered(false);  react-hooks/set-state-in-effect
+
+C:\Antigravity\Web\Zitora\src\pages\Timeline.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+C:\Antigravity\Web\Zitora\src\pages\Tutorial.jsx
+  1:8  error  'React' is defined but never used  no-unused-vars
+
+✖ 32 problems (31 errors, 1 warning)

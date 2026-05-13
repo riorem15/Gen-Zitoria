@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useStore } from '../../store/useStore';
 import { Brain, Target, TrendingUp, Sparkles } from 'lucide-react';
 import { historyPhases } from '../../data/historyContent';
 
 export default function AIAnalysis() {
-  const { streak, bestStreak, points, zpdLevel, moduleProgress } = useStore();
+  const { streak, points, zpdLevel, moduleProgress } = useStore();
 
   const analysis = useMemo(() => {
     // Calculate total chapters completed
@@ -21,10 +21,10 @@ export default function AIAnalysis() {
     const completionRate = totalChapters > 0 ? (completedChapters / totalChapters) * 100 : 0;
     
     // Generate AI Feedback based on ZPD Level and Streak
-    let feedback = "";
-    let focus = "";
-    let accuracyText = "";
-    let accuracyColor = "";
+    let feedback;
+    let focus;
+    let accuracyText;
+    let accuracyColor;
 
     if (zpdLevel === 1) {
       if (streak === 0 && points > 0) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../store/useStore';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
@@ -14,14 +14,7 @@ export default function AIMentor({ currentQuestion, userWrongAnswer }) {
   // Jika zpdLevel > 1, AI Mentor tidak muncul (belajar mandiri)
   if (zpdLevel > 1) return null;
 
-  useEffect(() => {
-    if (userWrongAnswer) {
-      setIsOpen(true);
-      generateHint();
-    }
-  }, [userWrongAnswer]);
-
-  const generateHint = async () => {
+  const generateHint = useCallback(async () => {
     setIsLoading(true);
     try {
       if (!API_KEY) {
@@ -56,7 +49,14 @@ export default function AIMentor({ currentQuestion, userWrongAnswer }) {
       setMessages(prev => [...prev, { role: 'ai', content: "Maaf, mentor sedang beristirahat. Coba baca ulang materinya ya!" }]);
     }
     setIsLoading(false);
-  };
+  }, [currentQuestion]);
+
+  useEffect(() => {
+    if (userWrongAnswer) {
+      setIsOpen(true);
+      generateHint();
+    }
+  }, [userWrongAnswer, generateHint]);
 
   return (
     <div className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50 flex flex-col items-end">

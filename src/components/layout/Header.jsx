@@ -1,4 +1,3 @@
-import React from 'react';
 import { useStore } from '../../store/useStore';
 import { Flame, Moon, Sun } from 'lucide-react';
 
