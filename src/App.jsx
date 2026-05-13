@@ -4,6 +4,7 @@ import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 import BottomNav from './components/layout/BottomNav';
 import Home from './pages/Home';
+import MaterialsDashboard from './pages/MaterialsDashboard';
 import PlayZone from './pages/PlayZone';
 import Leaderboard from './pages/Leaderboard';
 import MaterialView from './pages/MaterialView';
@@ -83,6 +84,7 @@ function App() {
                 <div className="flex-1 pb-24 md:pb-8 pt-20 px-4 md:px-8">
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/materi" element={<MaterialsDashboard />} />
                     <Route path="/material/:phaseId/:chapterId" element={<MaterialView />} />
                     <Route path="/play" element={<PlayZone />} />
                     <Route path="/leaderboard" element={<Leaderboard />} />

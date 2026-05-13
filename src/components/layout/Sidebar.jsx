@@ -10,7 +10,7 @@ export default function Sidebar() {
 
   const menuItems = [
     { path: '/', label: 'Dashboard', icon: 'home' },
-    { path: '#', label: 'Materi', icon: 'auto_stories' },
+    { path: '/materi', label: 'Materi', icon: 'auto_stories' },
     { path: '/play', label: 'Evaluasi', icon: 'sports_esports' },
     { path: '/leaderboard', label: 'Leaderboard', icon: 'leaderboard' },
   ];
