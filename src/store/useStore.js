@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 
 export const useStore = create((set, get) => ({
-  // Theme State
+  // Theme
   isDarkMode: localStorage.getItem('theme') === 'dark',
   toggleTheme: () => set((state) => {
     const newTheme = !state.isDarkMode;
@@ -12,43 +12,55 @@ export const useStore = create((set, get) => ({
     return { isDarkMode: newTheme };
   }),
 
-  // Auth State
+  // Auth
   user: null,
   sessionChecked: false,
   setUser: (user) => set({ user }),
   setSessionChecked: (value) => set({ sessionChecked: value }),
 
-  // Onboarding State
+  // Onboarding
   hasSeenTutorial: false,
-  setHasSeenTutorial: (value) => set({ hasSeenTutorial: value }),
+  setHasSeenTutorial: async (value) => {
+    set({ hasSeenTutorial: value });
+    await get().syncStats();
+  },
 
   // Level Assessment
   initialLevel: null,
-  setInitialLevel: (level) => set({ initialLevel: level }),
+  setInitialLevel: async (level) => {
+    set({ initialLevel: level });
+    await get().syncStats();
+  },
 
-  // Evaluation & ZPD Progress
+  // ZPD & Game Stats
   streak: 0,
   bestStreak: 0,
   zpdLevel: 1,
   points: 0,
   gamePoints: 0,
 
-  // Profile State
+  // Profile
   profileName: '',
   profileProvince: '',
   profileCountry: 'Indonesia',
-  profileAvatar: 'cat', // default avatar
-  setProfile: (data) => set({ ...data }),
+  profileAvatar: 'cat',
+  setProfile: async (data) => {
+    set({ ...data });
+    await get().syncStats();
+  },
 
   // Phase Completion
   completedPhases: [],
-  markPhaseComplete: (phaseId) => set((state) => ({
-    completedPhases: state.completedPhases.includes(phaseId)
-      ? state.completedPhases
-      : [...state.completedPhases, phaseId]
-  })),
+  markPhaseComplete: async (phaseId) => {
+    const state = get();
+    if (!state.completedPhases.includes(phaseId)) {
+      const updated = [...state.completedPhases, phaseId];
+      set({ completedPhases: updated });
+      await get().syncStats();
+    }
+  },
 
-  // Module Progress
+  // Module Progress — persisted to DB
   moduleProgress: {
     chap_1: { isCompleted: false, progress: 0 },
     chap_2: { isCompleted: false, progress: 0 },
@@ -66,7 +78,7 @@ export const useStore = create((set, get) => ({
     chap_14: { isCompleted: false, progress: 0 },
   },
 
-  // Daily Quests & Badges
+  // Daily Quests
   dailyQuests: [
     { id: 1, title: 'Buka 1 Materi Baru', isCompleted: false, current: 0, target: 1 },
     { id: 2, title: 'Jawab Benar 3 Soal', isCompleted: false, current: 0, target: 3 },
@@ -98,12 +110,13 @@ export const useStore = create((set, get) => ({
     return state;
   }),
 
-  addGamePoints: (amount) => set((state) => ({
-    gamePoints: state.gamePoints + amount,
-    points: state.points + amount,
-  })),
+  addGamePoints: (amount) => {
+    set((state) => ({ gamePoints: state.gamePoints + amount, points: state.points + amount }));
+    get().syncStats();
+  },
 
-  // Database Sync
+  // ─── DATABASE SYNC ───────────────────────────────────────────
+
   fetchStats: async () => {
     const { user } = get();
     if (!user) return;
@@ -113,47 +126,89 @@ export const useStore = create((set, get) => ({
         .select('*')
         .eq('id', user.id)
         .single();
+
       if (data && !error) {
+        // Parse JSON fields safely
+        const moduleProgress = data.module_progress
+          ? JSON.parse(data.module_progress)
+          : get().moduleProgress;
+        const completedPhases = data.completed_phases
+          ? JSON.parse(data.completed_phases)
+          : [];
+
         set({
           points: data.points || 0,
+          gamePoints: data.game_points || 0,
           bestStreak: data.best_streak || 0,
           profileName: data.profile_name || '',
           profileProvince: data.profile_province || '',
+          profileCountry: data.profile_country || 'Indonesia',
           profileAvatar: data.profile_avatar || 'cat',
+          hasSeenTutorial: data.has_seen_tutorial || false,
+          initialLevel: data.initial_level || null,
+          moduleProgress,
+          completedPhases,
         });
       }
     } catch (err) {
-      console.error('Failed to fetch stats', err);
+      console.error('fetchStats error:', err);
     }
   },
 
   syncStats: async () => {
-    const { user, points, bestStreak, profileName, profileProvince, profileAvatar } = get();
+    const {
+      user, points, gamePoints, bestStreak,
+      profileName, profileProvince, profileCountry, profileAvatar,
+      hasSeenTutorial, initialLevel, moduleProgress, completedPhases,
+    } = get();
     if (!user) return;
     try {
       await supabase.from('user_stats').upsert({
         id: user.id,
         email: user.email,
         points,
+        game_points: gamePoints,
         best_streak: bestStreak,
         profile_name: profileName,
         profile_province: profileProvince,
+        profile_country: profileCountry,
         profile_avatar: profileAvatar,
-        updated_at: new Date().toISOString()
+        has_seen_tutorial: hasSeenTutorial,
+        initial_level: initialLevel,
+        module_progress: JSON.stringify(moduleProgress),
+        completed_phases: JSON.stringify(completedPhases),
+        updated_at: new Date().toISOString(),
       }, { onConflict: 'id' });
     } catch (err) {
-      console.error('Failed to sync stats', err);
+      console.error('syncStats error:', err);
     }
   },
 
-  completeModule: (chapterId) => {
+  // ─── ACTIONS ─────────────────────────────────────────────────
+
+  completeModule: async (chapterId) => {
     set((state) => ({
       moduleProgress: {
         ...state.moduleProgress,
-        [chapterId]: { isCompleted: true, progress: 100 }
-      }
+        [chapterId]: { isCompleted: true, progress: 100 },
+      },
     }));
     get().updateQuestProgress(1);
+    await get().syncStats();
+  },
+
+  updateModuleProgress: async (chapterId, progress) => {
+    set((state) => ({
+      moduleProgress: {
+        ...state.moduleProgress,
+        [chapterId]: {
+          ...state.moduleProgress[chapterId],
+          progress: Math.max(state.moduleProgress[chapterId]?.progress || 0, progress),
+          isCompleted: progress >= 100 ? true : state.moduleProgress[chapterId]?.isCompleted,
+        },
+      },
+    }));
+    await get().syncStats();
   },
 
   addStreak: () => {
@@ -179,6 +234,6 @@ export const useStore = create((set, get) => ({
 
   signOut: async () => {
     await supabase.auth.signOut();
-    set({ user: null });
-  }
+    set({ user: null, sessionChecked: false });
+  },
 }));

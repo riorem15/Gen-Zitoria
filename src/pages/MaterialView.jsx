@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { historyPhases } from '../data/historyContent';
 import { useStore } from '../store/useStore';
@@ -7,7 +7,8 @@ import { ArrowLeft, CheckCircle2, AlertTriangle, Play, Pause, Volume2 } from 'lu
 export default function MaterialView() {
   const { phaseId, chapterId } = useParams();
   const navigate = useNavigate();
-  const { moduleProgress, completeModule } = useStore();
+  const { moduleProgress, completeModule, updateModuleProgress } = useStore();
+  const contentRef = useRef(null);
   
   const [phase, setPhase] = useState(null);
   const [chapter, setChapter] = useState(null);
@@ -43,6 +44,19 @@ export default function MaterialView() {
     setIsLocked(locked);
   }, [phaseId, chapterId, moduleProgress, navigate]);
 
+  // Track scroll progress and save to DB
+  const handleScroll = useCallback(() => {
+    if (!contentRef.current) return;
+    const el = contentRef.current;
+    const scrolled = el.scrollTop;
+    const total = el.scrollHeight - el.clientHeight;
+    if (total <= 0) return;
+    const pct = Math.round((scrolled / total) * 100);
+    if (pct > (moduleProgress[chapterId]?.progress || 0)) {
+      updateModuleProgress(chapterId, pct);
+    }
+  }, [chapterId, moduleProgress, updateModuleProgress]);
+
   // Stop speech when leaving page
   useEffect(() => {
     return () => {
@@ -57,8 +71,8 @@ export default function MaterialView() {
   const isCompleted = moduleProgress[chapter.id]?.isCompleted;
 
   const handleMarkComplete = () => {
-    completeModule(chapter.id);
-  };
+    completeModule(chapter.id); // async - syncs to DB
+  };;
 
   const handleStartEvaluation = () => {
     navigate(`/play?chapter=${chapter.id}`);
@@ -155,10 +169,14 @@ export default function MaterialView() {
               </div>
             </div>
           ) : (
-            <div className="space-y-6 text-lg leading-relaxed opacity-90 max-w-none">
-              <div 
+            <div
+              ref={contentRef}
+              onScroll={handleScroll}
+              className="space-y-6 text-lg leading-relaxed opacity-90 max-w-none max-h-[70vh] overflow-y-auto pr-2"
+            >
+              <div
                 className="prose-content"
-                dangerouslySetInnerHTML={{ __html: chapter.content }} 
+                dangerouslySetInnerHTML={{ __html: chapter.content }}
               />
             </div>
           )}
