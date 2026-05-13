@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCcw, ThumbsUp, ThumbsDown, Layers } from 'lucide-react';
 import { questionBank } from '../data/questions';
@@ -13,13 +13,19 @@ export default function Flashcards() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
+  const [finished, setFinished] = useState(false);
 
   const currentCard = cards[currentIndex];
 
+  useEffect(() => {
+    if (finished) updateQuestProgress(3);
+  }, [finished, updateQuestProgress]);
+
   const handleNext = (knewIt) => {
-    if (knewIt) setScore(score + 1);
+    if (knewIt) setScore(s => s + 1);
     setIsFlipped(false);
     setTimeout(() => {
+      if (currentIndex + 1 >= cards.length) { setFinished(true); return; }
       setCurrentIndex(currentIndex + 1);
     }, 150);
   };
@@ -29,10 +35,10 @@ export default function Flashcards() {
     setCurrentIndex(0);
     setScore(0);
     setIsFlipped(false);
+    setFinished(false);
   };
 
-  if (currentIndex >= cards.length) {
-    updateQuestProgress(3); // Trigger quest completion when flashcards are done
+  if (finished) {
     return (
       <div className="max-w-md mx-auto space-y-6 pt-10 pb-20 text-center animate-in fade-in">
         <h2 className="text-4xl font-black text-gen mb-4">Latihan Selesai!</h2>

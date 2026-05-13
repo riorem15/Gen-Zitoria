@@ -1,46 +1,42 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useStore } from '../../store/useStore';
-import { LogOut } from 'lucide-react';
 
 export default function BottomNav() {
   const location = useLocation();
-  const { signOut } = useStore();
 
   const navItems = [
     { path: '/', icon: 'home', label: 'Home' },
     { path: '/materi', icon: 'auto_stories', label: 'Materi' },
-    { path: '/flashcards', icon: 'style', label: 'Flashcards' },
-    { path: '/play', icon: 'sports_esports', label: 'Evaluasi' },
+    { path: '/games', icon: 'sports_esports', label: 'Game' },
+    { path: '/evaluation', icon: 'school', label: 'Evaluasi' },
     { path: '/leaderboard', icon: 'leaderboard', label: 'Rank' },
+    { path: '/profile', icon: 'person', label: 'Profil' },
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full z-50 flex justify-around items-center px-2 py-3 md:hidden glass-panel rounded-b-none border-x-0 border-b-0 pb-safe">
+    <nav className="fixed bottom-0 w-full z-50 flex justify-around items-center px-1 py-2 md:hidden glass-panel rounded-b-none border-x-0 border-b-0 pb-safe">
       {navItems.map((item) => {
-        const isActive = location.pathname === item.path;
+        const isActive = location.pathname === item.path ||
+          (item.path !== '/' && location.pathname.startsWith(item.path));
         return (
-          <Link 
+          <Link
             key={item.label}
             to={item.path}
-            className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-300 ${
-              isActive 
-                ? 'text-primary scale-110' 
-                : 'text-on-surface opacity-70 hover:opacity-100 hover:bg-glass'
+            className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-all duration-300 ${
+              isActive
+                ? 'text-primary scale-110'
+                : 'text-on-surface opacity-60 hover:opacity-100 hover:bg-glass'
             }`}
           >
-            <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}>{item.icon}</span>
-            <span className="text-[10px] font-bold mt-1">{item.label}</span>
+            <span
+              className="material-symbols-outlined text-2xl"
+              style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}
+            >
+              {item.icon}
+            </span>
+            <span className="text-[9px] font-bold mt-0.5">{item.label}</span>
           </Link>
         );
       })}
-      {/* Logout button in nav for mobile */}
-      <button 
-        onClick={signOut}
-        className="flex flex-col items-center justify-center p-2 rounded-xl text-error opacity-70 hover:opacity-100 transition-all"
-      >
-        <LogOut className="w-6 h-6 mb-1" />
-        <span className="text-[10px] font-bold">Keluar</span>
-      </button>
     </nav>
   );
 }

@@ -1,10 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useStore } from '../store/useStore';
-import { Trophy, Flame, User, Crown } from 'lucide-react';
+import { Trophy, Flame, Crown } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
+const AVATAR_COLORS = {
+  cat: 'from-orange-400 to-amber-500',
+  dog: 'from-amber-500 to-yellow-600',
+  rhino: 'from-slate-500 to-gray-600',
+  fox: 'from-orange-500 to-red-500',
+  owl: 'from-amber-700 to-yellow-800',
+  panda: 'from-gray-700 to-slate-800',
+};
+const AVATAR_EMOJI = { cat:'🐱', dog:'🐶', rhino:'🦏', fox:'🦊', owl:'🦉', panda:'🐼' };
+
 export default function Leaderboard() {
-  const { streak, points, initialLevel, user, moduleProgress } = useStore();
+  const { streak, points, initialLevel, user, moduleProgress, profileAvatar, profileName } = useStore();
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,19 +23,19 @@ export default function Leaderboard() {
       try {
         const { data, error } = await supabase
           .from('user_stats')
-          .select('email, points, best_streak')
+          .select('email, points, best_streak, profile_name, profile_avatar')
           .order('points', { ascending: false })
           .limit(50);
           
         if (error) throw error;
         
-        // Format data
         if (data) {
           const formatted = data.map(item => ({
-            name: item.email ? item.email.split('@')[0] : 'Anonymous',
+            name: item.profile_name || (item.email ? item.email.split('@')[0] : 'Anonymous'),
             points: item.points || 0,
             bestStreak: item.best_streak || 0,
-            email: item.email
+            email: item.email,
+            avatar: item.profile_avatar || 'cat',
           }));
           setLeaderboardData(formatted);
         }
@@ -86,8 +96,8 @@ export default function Leaderboard() {
                 {top3[1] && (
                   <div className="flex flex-col items-center justify-end h-[80%] w-1/3 animate-in slide-in-from-bottom-8 duration-700 delay-100">
                     <div className="relative mb-2">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 border-4 border-slate-300 shadow-lg flex items-center justify-center font-bold text-xl text-slate-800">
-                        {top3[1].name.charAt(0).toUpperCase()}
+                      <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br ${AVATAR_COLORS[top3[1].avatar]||'from-slate-400 to-slate-600'} border-4 border-slate-300 shadow-lg flex items-center justify-center text-2xl`}>
+                        {AVATAR_EMOJI[top3[1].avatar]||'👤'}
                       </div>
                       <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-2xl drop-shadow-md">🥈</div>
                     </div>
@@ -102,8 +112,8 @@ export default function Leaderboard() {
                 {top3[0] && (
                   <div className="flex flex-col items-center justify-end h-full w-1/3 z-10 animate-in slide-in-from-bottom-12 duration-700">
                     <div className="relative mb-2">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-yellow-300 to-yellow-600 border-4 border-yellow-400 shadow-xl flex items-center justify-center font-black text-2xl sm:text-3xl text-yellow-900">
-                        {top3[0].name.charAt(0).toUpperCase()}
+                      <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br ${AVATAR_COLORS[top3[0].avatar]||'from-yellow-400 to-yellow-600'} border-4 border-yellow-400 shadow-xl flex items-center justify-center text-3xl sm:text-4xl`}>
+                        {AVATAR_EMOJI[top3[0].avatar]||'👤'}
                       </div>
                       <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-4xl drop-shadow-lg animate-bounce">
                         <Crown className="text-yellow-500 fill-yellow-400 w-10 h-10" />
@@ -120,8 +130,8 @@ export default function Leaderboard() {
                 {top3[2] && (
                   <div className="flex flex-col items-center justify-end h-[70%] w-1/3 animate-in slide-in-from-bottom-4 duration-700 delay-200">
                     <div className="relative mb-2">
-                      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 border-4 border-amber-600 shadow-md flex items-center justify-center font-bold text-lg text-amber-100">
-                        {top3[2].name.charAt(0).toUpperCase()}
+                      <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br ${AVATAR_COLORS[top3[2].avatar]||'from-amber-600 to-amber-800'} border-4 border-amber-600 shadow-md flex items-center justify-center text-xl sm:text-2xl`}>
+                        {AVATAR_EMOJI[top3[2].avatar]||'👤'}
                       </div>
                       <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-xl drop-shadow-md">🥉</div>
                     </div>
@@ -156,9 +166,9 @@ export default function Leaderboard() {
                           </td>
                           <td className="px-8 py-5">
                             <div className="flex items-center gap-4">
-                              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${student.isUser ? 'bg-gradient-to-br from-primary to-secondary text-white shadow-md' : 'bg-surface border border-glass-border text-on-surface'}`}>
-                                {student.isUser ? <User className="w-5 h-5" /> : student.name.charAt(0).toUpperCase()}
-                              </div>
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl shrink-0 bg-gradient-to-br ${AVATAR_COLORS[student.avatar]||'from-primary to-secondary'} ${student.isUser ? 'ring-2 ring-primary shadow-md' : ''}`}>
+                              {AVATAR_EMOJI[student.avatar]||'👤'}
+                            </div>
                               <span className={`font-bold ${student.isUser ? 'text-primary' : ''}`}>
                                 {student.name}
                                 {student.isUser && <span className="ml-2 text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">Kamu</span>}
@@ -192,10 +202,10 @@ export default function Leaderboard() {
           <div className="glass-panel p-8 flex flex-col items-center text-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary blur-[50px] opacity-20 rounded-full pointer-events-none"></div>
             
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center font-black text-3xl mb-4 shadow-lg ring-4 ring-background z-10">
-              {user?.email?.charAt(0).toUpperCase() || 'U'}
+            <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${AVATAR_COLORS[profileAvatar]||'from-primary to-secondary'} flex items-center justify-center text-5xl mb-4 shadow-lg ring-4 ring-background z-10`}>
+              {AVATAR_EMOJI[profileAvatar]||'👤'}
             </div>
-            <h3 className="text-xl font-black mb-1 z-10">{user?.email?.split('@')[0] || 'Pelajar Gen Zitoria'}</h3>
+            <h3 className="text-xl font-black mb-1 z-10">{profileName || user?.email?.split('@')[0] || 'Pelajar Gen Zitoria'}</h3>
             <p className="text-sm font-semibold text-primary mb-8 z-10">Level {initialLevel || '?'} Historian</p>
 
             <div className="flex w-full justify-between bg-surface/50 rounded-2xl p-4 mb-6 border border-glass-border z-10">

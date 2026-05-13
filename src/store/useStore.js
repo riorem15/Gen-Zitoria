@@ -1,19 +1,14 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
+
 export const useStore = create((set, get) => ({
   // Theme State
   isDarkMode: localStorage.getItem('theme') === 'dark',
   toggleTheme: () => set((state) => {
     const newTheme = !state.isDarkMode;
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-    
-    // Update document class
-    if (newTheme) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    
+    if (newTheme) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
     return { isDarkMode: newTheme };
   }),
 
@@ -22,36 +17,48 @@ export const useStore = create((set, get) => ({
   sessionChecked: false,
   setUser: (user) => set({ user }),
   setSessionChecked: (value) => set({ sessionChecked: value }),
-  
+
   // Onboarding State
   hasSeenTutorial: false,
   setHasSeenTutorial: (value) => set({ hasSeenTutorial: value }),
-  
-  // Level Assessment State (0: None, 1: Little, 2: Understand, 3: Deep)
-  initialLevel: null, 
+
+  // Level Assessment
+  initialLevel: null,
   setInitialLevel: (level) => set({ initialLevel: level }),
 
   // Evaluation & ZPD Progress
   streak: 0,
   bestStreak: 0,
-  zpdLevel: 1, // 1 (LOTS), 2 (MOTS), 3 (HOTS)
+  zpdLevel: 1,
   points: 0,
-  
-  // Chronological Module Progress
-  // For each chapter, we store progress (0 to 100), and isCompleted
+  gamePoints: 0,
+
+  // Profile State
+  profileName: '',
+  profileProvince: '',
+  profileCountry: 'Indonesia',
+  profileAvatar: 'cat', // default avatar
+  setProfile: (data) => set({ ...data }),
+
+  // Phase Completion
+  completedPhases: [],
+  markPhaseComplete: (phaseId) => set((state) => ({
+    completedPhases: state.completedPhases.includes(phaseId)
+      ? state.completedPhases
+      : [...state.completedPhases, phaseId]
+  })),
+
+  // Module Progress
   moduleProgress: {
-    // Fase E Awal
     chap_1: { isCompleted: false, progress: 0 },
     chap_2: { isCompleted: false, progress: 0 },
     chap_3: { isCompleted: false, progress: 0 },
     chap_4: { isCompleted: false, progress: 0 },
     chap_5: { isCompleted: false, progress: 0 },
-    // Fase E Akhir & F Awal
     chap_6: { isCompleted: false, progress: 0 },
     chap_7: { isCompleted: false, progress: 0 },
     chap_8: { isCompleted: false, progress: 0 },
     chap_9: { isCompleted: false, progress: 0 },
-    // Fase F Akhir
     chap_10: { isCompleted: false, progress: 0 },
     chap_11: { isCompleted: false, progress: 0 },
     chap_12: { isCompleted: false, progress: 0 },
@@ -76,14 +83,11 @@ export const useStore = create((set, get) => ({
       }
       return q;
     });
-
-    // Check for badge unlocks
     const completedCount = updatedQuests.filter(q => q.isCompleted).length;
     let newBadges = [...state.unlockedBadges];
     if (completedCount === 3 && !newBadges.includes('Pahlawan Harian')) {
       newBadges.push('Pahlawan Harian');
     }
-
     return { dailyQuests: updatedQuests, unlockedBadges: newBadges };
   }),
 
@@ -94,7 +98,12 @@ export const useStore = create((set, get) => ({
     return state;
   }),
 
-  // Database Sync Actions
+  addGamePoints: (amount) => set((state) => ({
+    gamePoints: state.gamePoints + amount,
+    points: state.points + amount,
+  })),
+
+  // Database Sync
   fetchStats: async () => {
     const { user } = get();
     if (!user) return;
@@ -104,11 +113,13 @@ export const useStore = create((set, get) => ({
         .select('*')
         .eq('id', user.id)
         .single();
-        
       if (data && !error) {
         set({
           points: data.points || 0,
           bestStreak: data.best_streak || 0,
+          profileName: data.profile_name || '',
+          profileProvince: data.profile_province || '',
+          profileAvatar: data.profile_avatar || 'cat',
         });
       }
     } catch (err) {
@@ -117,26 +128,24 @@ export const useStore = create((set, get) => ({
   },
 
   syncStats: async () => {
-    const { user, points, bestStreak } = get();
+    const { user, points, bestStreak, profileName, profileProvince, profileAvatar } = get();
     if (!user) return;
     try {
-      const { error } = await supabase
-        .from('user_stats')
-        .upsert({ 
-          id: user.id, 
-          email: user.email,
-          points: points,
-          best_streak: bestStreak,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'id' });
-        
-      if (error) console.error('Error syncing stats:', error);
+      await supabase.from('user_stats').upsert({
+        id: user.id,
+        email: user.email,
+        points,
+        best_streak: bestStreak,
+        profile_name: profileName,
+        profile_province: profileProvince,
+        profile_avatar: profileAvatar,
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'id' });
     } catch (err) {
       console.error('Failed to sync stats', err);
     }
   },
 
-  // Actions
   completeModule: (chapterId) => {
     set((state) => ({
       moduleProgress: {
@@ -144,48 +153,30 @@ export const useStore = create((set, get) => ({
         [chapterId]: { isCompleted: true, progress: 100 }
       }
     }));
-    get().updateQuestProgress(1); // Misi 1: Buka/Selesaikan materi
+    get().updateQuestProgress(1);
   },
 
   addStreak: () => {
     const state = get();
     const newStreak = state.streak + 1;
     let newLevel = state.zpdLevel;
-
-    // Naik level (LOTS -> MOTS -> HOTS) setiap 5 streak
-    if (newStreak % 5 === 0 && newLevel < 3) {
-      newLevel += 1;
-    }
-
+    if (newStreak % 5 === 0 && newLevel < 3) newLevel += 1;
     const newPoints = state.points + (10 * newLevel * (newStreak > 3 ? 2 : 1));
     const newBestStreak = Math.max(state.bestStreak || 0, newStreak);
-
-    set({ 
-      streak: newStreak, 
-      points: newPoints, 
-      zpdLevel: newLevel,
-      bestStreak: newBestStreak
-    });
-    
-    get().updateQuestProgress(2); // Misi 2: Jawab soal benar
+    set({ streak: newStreak, points: newPoints, zpdLevel: newLevel, bestStreak: newBestStreak });
+    get().updateQuestProgress(2);
     if (newStreak >= 5) get().unlockBadge('Penguasa Streak');
     if (newLevel === 3) get().unlockBadge('Master HOTS');
-    
-    // Sync after setting local state
     get().syncStats();
   },
 
   resetStreak: () => {
     const state = get();
     let newLevel = state.zpdLevel;
-    // Turun level jika streak putus beruntun
-    if (state.streak === 0 && newLevel > 1) {
-      newLevel -= 1; 
-    }
+    if (state.streak === 0 && newLevel > 1) newLevel -= 1;
     set({ streak: 0, zpdLevel: newLevel });
   },
 
-  // Auth actions
   signOut: async () => {
     await supabase.auth.signOut();
     set({ user: null });
