@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { BookOpen, Flame, Medal, ArrowRight, Camera, Mail, MapPin } from 'lucide-react';
+import { BookOpen, Flame, Medal, ArrowRight, Camera, Mail, MapPin, Gamepad2, Sparkles, Target } from 'lucide-react';
 
 const Tutorial = () => {
   const navigate = useNavigate();
@@ -26,6 +26,21 @@ const Tutorial = () => {
       icon: <Medal className="w-8 h-8 text-yellow-500" />,
       title: "Leaderboard Global",
       desc: "Uji kecepatan dan ketepatanmu. Kumpulkan poin terbanyak dan raih posisi puncak di Leaderboard Gen Zitoria."
+    },
+    {
+      icon: <Gamepad2 className="w-8 h-8 text-green-500" />,
+      title: "Game Hub Interaktif",
+      desc: "Belajar sejarah tak lagi membosankan! Uji ingatanmu dengan Flashcards, susun kata di Word Builder, dan urutkan peristiwa."
+    },
+    {
+      icon: <Sparkles className="w-8 h-8 text-purple-500" />,
+      title: "AI Mentor & Analisis",
+      desc: "Dapatkan umpan balik instan dan analisis pembelajaran dari Kecerdasan Buatan yang siap memandu pemahamanmu secara personal."
+    },
+    {
+      icon: <Target className="w-8 h-8 text-rose-500" />,
+      title: "Misi Harian & Lencana",
+      desc: "Selesaikan misi harian untuk mendapatkan poin dan kumpulkan lencana eksklusif. Jadikan setiap belajarmu penuh pencapaian!"
     }
   ];
 
