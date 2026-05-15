@@ -66,14 +66,6 @@ export default function Home() {
               Zitora: <span className="text-gen">Adaptasi</span> Menembus Batas Waktu.
             </h2>
             
-            <div className="space-y-4 text-on-surface/80 text-lg leading-relaxed max-w-3xl">
-              <p>
-                Selama puluhan tahun, pembelajaran sejarah sering dianggap membosankan—hanya sekadar menghafal angka tahun dan nama tokoh yang statis. Masalah utama pendidikan sejarah kita adalah <strong>kurangnya relevansi kognitif</strong> dan <strong>metodologi yang pasif</strong>.
-              </p>
-              <p>
-                <strong>Zitora (Gen-Zitoria)</strong> hadir sebagai solusi revolusioner. Dengan mengintegrasikan <em>Bloom's Taxonomy</em> dan teori <em>Zone of Proximal Development (ZPD)</em>, kami menciptakan ekosistem belajar yang <strong>adaptif</strong>. Kami tidak hanya memberikan data, tapi melatih kemampuan berpikir kritis (HOTS) melalui narasi yang mendalam dan gamifikasi interaktif.
-              </p>
-            </div>
 
             <div className="flex flex-wrap gap-4 pt-4">
               <div className="bg-surface/80 backdrop-blur-sm p-4 rounded-2xl border border-glass-border flex items-center gap-3 shadow-sm">
@@ -224,57 +216,7 @@ export default function Home() {
         })}
       </div>
 
-      {/* FOOTER SECTION */}
-      <footer className="mt-20 border-t border-glass-border pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="space-y-6">
-            <h4 className="text-2xl font-black text-gen">Gen Zitoria</h4>
-            <p className="text-on-surface opacity-70 leading-relaxed">
-              Zitoria adalah platform pembelajaran sejarah adaptif yang dirancang khusus untuk generasi masa kini. 
-              Menggabungkan kecerdasan buatan, gamifikasi, dan kurikulum sejarah yang mendalam untuk menciptakan 
-              pengalaman belajar yang tak terlupakan.
-            </p>
-          </div>
-          
-          <div className="space-y-6">
-            <h5 className="text-lg font-bold">Kontak Kami</h5>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-on-surface/70 hover:text-primary transition-colors cursor-pointer">
-                <div className="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined text-sm">alternate_email</span>
-                </div>
-                <span>2288230033@untirta.ac.id</span>
-              </li>
-              <li className="flex items-center gap-3 text-on-surface/70 hover:text-primary transition-colors cursor-pointer" onClick={() => window.open('https://instagram.com/Riorem15', '_blank')}>
-                <div className="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined text-sm">photo_camera</span>
-                </div>
-                <span>@Riorem15</span>
-              </li>
-            </ul>
-          </div>
 
-          <div className="space-y-6">
-            <h5 className="text-lg font-bold">Alamat & Lokasi</h5>
-            <div className="bg-surface/50 p-6 rounded-2xl border border-glass-border space-y-4">
-              <div className="flex gap-3">
-                <span className="material-symbols-outlined text-primary">location_on</span>
-                <p className="text-sm text-on-surface/70">FKIP UNTIRTA CIWARU, Serang, Banten, Indonesia.</p>
-              </div>
-              <button 
-                onClick={() => window.open('https://maps.google.com/?q=FKIP+UNTIRTA+CIWARU', '_blank')}
-                className="w-full py-3 rounded-xl bg-primary text-white font-black text-sm hover:scale-105 transition-all"
-              >
-                Kunjungi Alamat
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-16 pt-8 border-t border-glass-border/50 text-center text-xs opacity-50 font-medium">
-          © 2026 Gen Zitoria. Crafted with Passion for Historical Education Excellence.
-        </div>
-      </footer>
     </div>
   );
 }
