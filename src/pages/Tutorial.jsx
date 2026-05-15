@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { BookOpen, Flame, Medal, ArrowRight, Camera, Mail, MapPin, Gamepad2, Sparkles, Target } from 'lucide-react';
+import { BookOpen, Flame, Medal, ArrowRight, Camera, Mail, MapPin, Gamepad2, Sparkles, Target, Compass, GraduationCap, Crown } from 'lucide-react';
 
 const Tutorial = () => {
   const navigate = useNavigate();
@@ -44,6 +44,41 @@ const Tutorial = () => {
     }
   ];
 
+  const levels = [
+    {
+      level: 0,
+      title: "Pemula",
+      icon: <Sparkles className="w-6 h-6" />,
+      desc: "Baru ingin mengenal sejarah dengan cara asyik.",
+      gradient: "from-[#FAD961] to-[#F76B1C]",
+      features: ["Fokus fakta menarik", "Bahasa santai & emoji", "Kuis LOTS (Dasar)"]
+    },
+    {
+      level: 1,
+      title: "Penjelajah",
+      icon: <Compass className="w-6 h-6" />,
+      desc: "Ingin menelusuri alur waktu dan kronologi.",
+      gradient: "from-[#85FFBD] to-[#FFFB7D]",
+      features: ["Fokus pada kronologi", "Sebab-akibat ringan", "Campuran LOTS & MOTS"]
+    },
+    {
+      level: 2,
+      title: "Sejarawan",
+      icon: <GraduationCap className="w-6 h-6" />,
+      desc: "Siap menganalisis konteks sosial dan politik.",
+      gradient: "from-[#21D4FD] to-[#B721FF]",
+      features: ["Analisis mendalam", "Konteks sosiopolitik", "Kuis MOTS & HOTS"]
+    },
+    {
+      level: 3,
+      title: "Master",
+      icon: <Crown className="w-6 h-6" />,
+      desc: "Mengkaji historiografi dan interpretasi kritis.",
+      gradient: "from-[#00DBDE] to-[#FC00FF]",
+      features: ["Kritik historiografi", "Perspektif multi", "Kuis Murni HOTS"]
+    }
+  ];
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 md:p-8 relative overflow-hidden bg-background">
       {/* Background Decor */}
@@ -77,16 +112,60 @@ const Tutorial = () => {
           </div>
 
           {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {features.map((feat, idx) => (
-              <div key={idx} className="bg-background/30 p-6 rounded-2xl border border-glass-border hover:-translate-y-2 transition-transform duration-300 shadow-sm">
-                <div className="bg-surface w-14 h-14 rounded-full flex items-center justify-center shadow-sm mb-5">
-                  {feat.icon}
+          <div className="mb-16">
+            <h2 className="text-2xl font-black text-center mb-8">Fitur Unggulan</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {features.map((feat, idx) => (
+                <div key={idx} className="bg-background/30 p-6 rounded-2xl border border-glass-border hover:-translate-y-2 transition-transform duration-300 shadow-sm">
+                  <div className="bg-surface w-14 h-14 rounded-full flex items-center justify-center shadow-sm mb-5">
+                    {feat.icon}
+                  </div>
+                  <h3 className="text-lg font-bold mb-3">{feat.title}</h3>
+                  <p className="text-sm opacity-80 leading-relaxed">{feat.desc}</p>
                 </div>
-                <h3 className="text-lg font-bold mb-3">{feat.title}</h3>
-                <p className="text-sm opacity-80 leading-relaxed">{feat.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Level Showcase */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-black mb-2">4 Tingkatan Level Belajar</h2>
+              <p className="opacity-70">Materi dan tantangan akan disesuaikan dengan kemampuanmu.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {levels.map((item, index) => (
+                <div key={index} className="group relative rounded-3xl p-6 text-left transition-all duration-300 hover:-translate-y-2 hover:shadow-xl overflow-hidden bg-background/50 border border-glass-border">
+                  {/* Gradient Header Indicator */}
+                  <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${item.gradient}`}></div>
+                  
+                  <div className="relative z-10 flex flex-col h-full mt-2">
+                    <div className={`mb-4 w-12 h-12 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${item.gradient} shadow-md`}>
+                      {item.icon}
+                    </div>
+                    
+                    <div className="mb-6">
+                      <div className="text-[10px] font-black uppercase tracking-widest opacity-50 mb-1">Level {item.level}</div>
+                      <h3 className="text-xl font-black mb-2">{item.title}</h3>
+                      <p className="text-xs font-medium leading-relaxed opacity-80">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-auto pt-4 border-t border-glass-border/50">
+                      <ul className="space-y-2">
+                        {item.features.map((f, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs font-bold opacity-70">
+                            <div className="w-1 h-1 rounded-full bg-primary shrink-0 mt-1.5"></div>
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Call to Action */}
