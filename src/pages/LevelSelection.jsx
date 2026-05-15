@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import { motion } from 'framer-motion';
+import { Sparkles, Compass, GraduationCap, Crown } from 'lucide-react';
 
 const LevelSelection = () => {
   const navigate = useNavigate();
@@ -14,65 +16,105 @@ const LevelSelection = () => {
     {
       level: 0,
       title: "Pemula",
-      desc: "Saya tidak tahu apa-apa tentang sejarah",
-      gradient: "from-green-400 to-green-50",
-      textColor: "text-green-900"
+      icon: <Sparkles className="w-8 h-8" />,
+      desc: "Baru ingin mengenal sejarah dengan cara yang asyik dan ringan.",
+      gradient: "from-[#FAD961] to-[#F76B1C]",
+      shadow: "shadow-orange-200",
+      features: ["Fokus pada fakta menarik", "Bahasa santai & banyak emoji", "Kuis LOTS (Dasar)"]
     },
     {
       level: 1,
       title: "Penjelajah",
-      desc: "Saya paham sedikit sejarah",
-      gradient: "from-red-800 to-yellow-400",
-      textColor: "text-white"
+      icon: <Compass className="w-8 h-8" />,
+      desc: "Ingin menelusuri alur waktu dan kronologi sejarah lebih dalam.",
+      gradient: "from-[#85FFBD] to-[#FFFB7D]",
+      shadow: "shadow-green-200",
+      features: ["Fokus pada kronologi", "Analisis sebab-akibat ringan", "Campuran LOTS & MOTS"]
     },
     {
       level: 2,
       title: "Sejarawan Muda",
-      desc: "Saya paham sejarah",
-      gradient: "from-blue-600 to-orange-400",
-      textColor: "text-white"
+      icon: <GraduationCap className="w-8 h-8" />,
+      desc: "Siap menganalisis konteks sosial, politik, dan ekonomi masa lalu.",
+      gradient: "from-[#21D4FD] to-[#B721FF]",
+      shadow: "shadow-blue-200",
+      features: ["Analisis mendalam", "Konteks sosiopolitik", "Kuis MOTS & HOTS"]
     },
     {
       level: 3,
       title: "Master Sejarah",
-      desc: "Saya mendalami sejarah",
-      gradient: "from-purple-700 to-pink-500",
-      textColor: "text-white"
+      icon: <Crown className="w-8 h-8" />,
+      desc: "Ingin mengkaji historiografi, filosofi, dan interpretasi kritis.",
+      gradient: "from-[#00DBDE] to-[#FC00FF]",
+      shadow: "shadow-purple-200",
+      features: ["Kritik historiografi", "Perspektif multidimensi", "Kuis Murni HOTS"]
     }
   ];
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden bg-background">
-      {/* Background Decor */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-float"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-[120px] opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
+      {/* Dynamic Background */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
       
-      <div className="max-w-5xl w-full relative z-10">
-        <div className="text-center mb-16">
-          <h1 className="text-headline-lg font-bold mb-4">Seberapa jauh kamu mengenal masa lalu?</h1>
-          <p className="text-body-lg opacity-80">Pilih level awalmu untuk menyesuaikan perjalanan sejarahmu di Gen Zitoria.</p>
-        </div>
+      <div className="max-w-6xl w-full relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight">
+            Pilih <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Level Perjalananmu</span>
+          </h1>
+          <p className="text-xl opacity-70 max-w-2xl mx-auto">
+            Zitoria akan menyesuaikan materi dan tantangan berdasarkan level yang kamu pilih. Tenang, kamu bisa berubah seiring waktu!
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {levels.map((item) => (
-            <button
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {levels.map((item, index) => (
+            <motion.button
               key={item.level}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
               onClick={() => handleSelect(item.level)}
-              className={`relative group rounded-[2rem] p-8 text-left transition-all duration-300 hover:-translate-y-4 hover:shadow-2xl overflow-hidden bg-gradient-to-br ${item.gradient} backdrop-blur-md`}
-              style={{ minHeight: '300px' }}
+              className={`group relative rounded-[2.5rem] p-8 text-left transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl overflow-hidden bg-white dark:bg-surface border-2 border-transparent hover:border-white/20`}
+              style={{ minHeight: '400px' }}
             >
-              {/* Glass overlay effect for bubble style */}
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
+              {/* Gradient Header */}
+              <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-br ${item.gradient} opacity-90 group-hover:h-full transition-all duration-700`}></div>
               
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <div className={`text-4xl font-bold mb-2 opacity-30 ${item.textColor}`}>Level {item.level}</div>
-                  <h3 className={`text-2xl font-bold mb-4 ${item.textColor}`}>{item.title}</h3>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="mb-6 bg-white/20 backdrop-blur-md w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                  {item.icon}
                 </div>
-                <p className={`text-lg font-medium leading-relaxed ${item.textColor}`}>"{item.desc}"</p>
+                
+                <div className="mt-2 transition-colors duration-500 group-hover:text-white">
+                  <div className="text-sm font-black uppercase tracking-widest opacity-60 mb-1">Level {item.level}</div>
+                  <h3 className="text-3xl font-black mb-4">{item.title}</h3>
+                  <p className="text-lg font-medium leading-relaxed mb-8 opacity-90">
+                    {item.desc}
+                  </p>
+                </div>
+
+                <div className="mt-auto pt-6 border-t border-black/10 group-hover:border-white/20">
+                  <ul className="space-y-3">
+                    {item.features.map((f, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm font-bold opacity-80 group-hover:text-white transition-colors">
+                        <div className="w-1.5 h-1.5 rounded-full bg-current"></div>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </button>
+
+              {/* Decorative elements */}
+              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+            </motion.button>
           ))}
         </div>
       </div>

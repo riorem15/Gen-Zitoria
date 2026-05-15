@@ -2,12 +2,13 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { historyPhases } from '../data/historyContent';
 import { useStore } from '../store/useStore';
-import { ArrowLeft, CheckCircle2, AlertTriangle, Play, Pause, Volume2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, AlertTriangle, Play, Pause, Volume2, Shield } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function MaterialView() {
   const { phaseId, chapterId } = useParams();
   const navigate = useNavigate();
-  const { moduleProgress, completeModule, updateModuleProgress } = useStore();
+  const { moduleProgress, completeModule, updateModuleProgress, initialLevel } = useStore();
   const contentRef = useRef(null);
   
   const [phase, setPhase] = useState(null);
@@ -30,7 +31,7 @@ export default function MaterialView() {
     
     setChapter(currentPhase.chapters[currentChapterIndex]);
 
-    // Check lock status (simplified, based on previous chapter completion)
+    // Check lock status
     let locked = false;
     if (currentChapterIndex > 0) {
       const prevChapterId = currentPhase.chapters[currentChapterIndex - 1].id;
@@ -44,7 +45,6 @@ export default function MaterialView() {
     setIsLocked(locked);
   }, [phaseId, chapterId, moduleProgress, navigate]);
 
-  // Track scroll progress and save to DB
   const handleScroll = useCallback(() => {
     if (!contentRef.current) return;
     const el = contentRef.current;
@@ -57,7 +57,6 @@ export default function MaterialView() {
     }
   }, [chapterId, moduleProgress, updateModuleProgress]);
 
-  // Stop speech when leaving page
   useEffect(() => {
     return () => {
       if ('speechSynthesis' in window) {
@@ -71,12 +70,15 @@ export default function MaterialView() {
   const isCompleted = moduleProgress[chapter.id]?.isCompleted;
 
   const handleMarkComplete = () => {
-    completeModule(chapter.id); // async - syncs to DB
-  };;
+    completeModule(chapter.id);
+  };
 
   const handleStartEvaluation = () => {
     navigate(`/play?chapter=${chapter.id}`);
   };
+
+  // Content Selection based on level
+  const activeContent = chapter.contentByLevel?.[initialLevel] || chapter.content || `<p>Konten sedang disiapkan untuk level ini.</p>`;
 
   const handleToggleSpeech = () => {
     if (!('speechSynthesis' in window)) {
@@ -93,29 +95,36 @@ export default function MaterialView() {
         setIsPaused(true);
       }
     } else {
-      // Strip HTML tags for clean reading
       const tmp = document.createElement("DIV");
-      tmp.innerHTML = chapter.content;
+      tmp.innerHTML = activeContent;
       const textToRead = tmp.textContent || tmp.innerText || "";
 
       const utterance = new SpeechSynthesisUtterance(textToRead);
       utterance.lang = 'id-ID';
-      utterance.rate = 0.9; // Slightly slower for storytelling
+      utterance.rate = 0.9;
       
       utterance.onend = () => {
         setIsPlaying(false);
         setIsPaused(false);
       };
       
-      window.speechSynthesis.cancel(); // Stop any ongoing
+      window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);
       setIsPlaying(true);
       setIsPaused(false);
     }
   };
 
+  const levelLabels = ["Pemula", "Penjelajah", "Sejarawan Muda", "Master"];
+  const levelGradients = [
+    "from-orange-400 to-orange-600",
+    "from-green-400 to-green-600",
+    "from-blue-400 to-blue-600",
+    "from-purple-400 to-purple-600"
+  ];
+
   return (
-    <main className="max-w-4xl mx-auto space-y-6 pb-20">
+    <main className="max-w-4xl mx-auto space-y-6 pb-20 px-4">
       <button 
         onClick={() => navigate('/')}
         className="flex items-center gap-2 text-on-surface opacity-70 hover:opacity-100 font-bold mb-4 transition-colors"
@@ -123,9 +132,11 @@ export default function MaterialView() {
         <ArrowLeft className="w-5 h-5" /> Kembali
       </button>
 
-      <div className="glass-panel p-8 md:p-12 relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary opacity-20 blur-[100px] rounded-full pointer-events-none"></div>
+      <div className="glass-panel p-6 md:p-12 relative overflow-hidden">
+        {/* Level Indicator Badge */}
+        <div className={`absolute top-4 right-4 flex items-center gap-2 px-4 py-1.5 rounded-full text-white font-black text-xs uppercase tracking-widest shadow-lg bg-gradient-to-r ${levelGradients[initialLevel]}`}>
+          <Shield className="w-3 h-3" /> Mode {levelLabels[initialLevel]}
+        </div>
 
         <div className="relative z-10">
           <div className="border-b border-glass-border pb-6 mb-8">
@@ -169,16 +180,19 @@ export default function MaterialView() {
               </div>
             </div>
           ) : (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              key={`${chapterId}-${initialLevel}`}
               ref={contentRef}
               onScroll={handleScroll}
-              className="space-y-6 text-lg leading-relaxed opacity-90 max-w-none max-h-[70vh] overflow-y-auto pr-2"
+              className="space-y-6 text-lg leading-relaxed opacity-90 max-w-none max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar"
             >
               <div
                 className="prose-content"
-                dangerouslySetInnerHTML={{ __html: chapter.content }}
+                dangerouslySetInnerHTML={{ __html: activeContent }}
               />
-            </div>
+            </motion.div>
           )}
 
           {!isLocked && (
