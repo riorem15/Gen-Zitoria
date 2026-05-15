@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export default function MaterialView() {
   const { phaseId, chapterId } = useParams();
   const navigate = useNavigate();
-  const { moduleProgress, completeModule, updateModuleProgress, initialLevel } = useStore();
+  const { moduleProgress, completeModule, updateModuleProgress, initialLevel, completedPhases } = useStore();
   const contentRef = useRef(null);
   
   const [phase, setPhase] = useState(null);
@@ -31,19 +31,15 @@ export default function MaterialView() {
     
     setChapter(currentPhase.chapters[currentChapterIndex]);
 
-    // Check lock status
+    // Check lock status (Phase-based)
     let locked = false;
-    if (currentChapterIndex > 0) {
-      const prevChapterId = currentPhase.chapters[currentChapterIndex - 1].id;
-      locked = !moduleProgress[prevChapterId]?.isCompleted;
-    } else if (currentPhaseIndex > 0) {
+    if (currentPhaseIndex > 0) {
       const prevPhase = historyPhases[currentPhaseIndex - 1];
-      const prevPhaseLastChapterId = prevPhase.chapters[prevPhase.chapters.length - 1].id;
-      locked = !moduleProgress[prevPhaseLastChapterId]?.isCompleted;
+      locked = !completedPhases.includes(prevPhase.id);
     }
     
     setIsLocked(locked);
-  }, [phaseId, chapterId, moduleProgress, navigate]);
+  }, [phaseId, chapterId, completedPhases, navigate]);
 
   const handleScroll = useCallback(() => {
     if (!contentRef.current) return;

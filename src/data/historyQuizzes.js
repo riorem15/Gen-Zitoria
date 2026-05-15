@@ -132,3 +132,42 @@ export const historyQuizzes = {
     ]
   }
 };
+
+export const phaseEvaluations = {
+  "fase_e_awal": [
+    { id: "fe_mc1", type: "MC", question: "Siapa yang menemukan Pithecanthropus Erectus?", options: ["Eugene Dubois", "Ter Haar", "Von Koenigswald", "Oppenoorth", "Raffles"], correctAnswer: 0, explanation: "Eugene Dubois menemukannya di Trinil tahun 1891." },
+    { id: "fe_mc2", type: "MC", question: "Apa arti harfiah dari kata Syajarotun?", options: ["Akar", "Batang", "Pohon", "Bunga", "Buah"], correctAnswer: 2, explanation: "Syajarotun berasal dari bahasa Arab yang berarti Pohon." },
+    { id: "fe_mc3", type: "MC", question: "Cara berpikir sejarah yang melebar dalam ruang namun terbatas dalam waktu disebut...", options: ["Diakronik", "Sinkronik", "Kronologis", "Anakronis", "Periodisasi"], correctAnswer: 1, explanation: "Sinkronik memfokuskan pada struktur di satu titik waktu." },
+    { id: "fe_tf1", type: "TF", question: "Manusia purba jenis Meganthropus ditemukan di Sangiran.", correctAnswer: true, explanation: "Meganthropus Palaeojavanicus ditemukan di Sangiran oleh Von Koenigswald." },
+    { id: "fe_tf2", type: "TF", question: "Masa Neolitikum ditandai dengan gaya hidup nomaden.", correctAnswer: false, explanation: "Neolitikum justru ditandai dengan gaya hidup menetap (sedenter)." },
+    { id: "fe_tf3", type: "TF", question: "Kjokkenmoddinger adalah tumpukan sampah dapur berupa kulit kerang.", correctAnswer: true, explanation: "Ini adalah bukti manusia purba pernah tinggal di pinggir pantai." },
+    { 
+      id: "fe_m1", 
+      type: "MATCH", 
+      question: "Pasangkan istilah berikut dengan artinya:", 
+      pairs: [
+        { left: "Syajarotun", right: "Pohon" },
+        { left: "Nomaden", right: "Berpindah-pindah" },
+        { left: "Abris Sous Roche", right: "Gua Tempat Tinggal" },
+        { left: "Sedenter", right: "Menetap" }
+      ]
+    }
+  ],
+  "fase_e_lanjut": [
+    { id: "fl_mc1", type: "MC", question: "Raja terbesar Majapahit adalah...", options: ["Hayam Wuruk", "Raden Wijaya", "Gajah Mada", "Kertanegara", "Jayanegara"], correctAnswer: 0, explanation: "Hayam Wuruk membawa Majapahit ke masa keemasan." },
+    { id: "fl_mc2", type: "MC", question: "Kerajaan Islam pertama di Indonesia adalah...", options: ["Demak", "Samudera Pasai", "Banten", "Mataram", "Gowa"], correctAnswer: 1, explanation: "Samudera Pasai di Aceh berdiri pada abad ke-13." },
+    { id: "fl_tf1", type: "TF", question: "Majapahit mencapai kejayaan di bawah Patih Gajah Mada.", correctAnswer: true, explanation: "Gajah Mada dengan Sumpah Palapa-nya yang mempersatukan Nusantara." },
+    { id: "fl_tf2", type: "TF", question: "Wali Songo menyebarkan Islam di Jawa melalui peperangan.", correctAnswer: false, explanation: "Wali Songo menggunakan pendekatan budaya, seni, dan dakwah damai." },
+    { 
+      id: "fl_m1", 
+      type: "MATCH", 
+      question: "Pasangkan Kerajaan dengan Coraknya:", 
+      pairs: [
+        { left: "Sriwijaya", right: "Maritim & Buddha" },
+        { left: "Majapahit", right: "Agraris & Hindu-Buddha" },
+        { left: "Demak", right: "Kesultanan Islam Jawa" },
+        { left: "Samudera Pasai", right: "Kesultanan Islam Pertama" }
+      ]
+    }
+  ]
+};
