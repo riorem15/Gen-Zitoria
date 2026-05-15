@@ -30,6 +30,35 @@ export default function PlayZone() {
   const [sessionScore, setSessionScore] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [answeredQuestionIds, setAnsweredQuestionIds] = useState(new Set());
+  const [showReview, setShowReview] = useState(false);
+
+  // Sound logic
+  const playSound = (type) => {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      if (type === 'correct') {
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+      } else {
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 0.3);
+      }
+    } catch(e) { console.error("Audio failed", e); }
+  };
 
   // Matching Logic States
   const [selectedLeft, setSelectedLeft] = useState(null);
@@ -132,6 +161,7 @@ export default function PlayZone() {
 
     setIsCorrect(correct);
     setIsAnswered(true);
+    playSound(correct ? 'correct' : 'wrong');
 
     const answerData = {
       question: currentQ.question,
@@ -438,19 +468,7 @@ export default function PlayZone() {
           </div>
         )}
 
-        <AnimatePresence>
-          {isAnswered && (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 p-6 rounded-2xl bg-surface border border-glass-border shadow-inner">
-              <div className="flex items-center gap-2 mb-3">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`}>
-                  {isCorrect ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
-                </div>
-                <h4 className="font-black text-lg">Pembahasan Jawaban</h4>
-              </div>
-              <p className="text-on-surface opacity-80 leading-relaxed italic">{currentQ.explanation || 'Pembahasan menarik sedang disiapkan!'}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
 
         <div className="flex justify-end gap-4">
           {!isAnswered ? (

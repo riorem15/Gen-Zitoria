@@ -145,8 +145,8 @@ export default function Leaderboard() {
               
               {/* REMAINING LIST */}
               {remainingList.length > 0 && (
-                <div className="overflow-x-auto -mx-8 px-8">
-                  <table className="w-full text-left border-collapse">
+                <div className="w-full overflow-x-auto pb-4 -mx-4 px-4 sm:-mx-8 sm:px-8">
+                  <table className="w-full min-w-[600px] text-left border-collapse">
                     <thead>
                       <tr className="text-xs font-bold opacity-60 uppercase tracking-wider bg-surface/30 border-b border-t border-glass-border">
                         <th className="px-8 py-4 w-20">Rank</th>
