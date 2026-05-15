@@ -54,6 +54,10 @@ export default function MaterialView() {
   }, [chapterId, moduleProgress, updateModuleProgress]);
 
   useEffect(() => {
+    if ('speechSynthesis' in window) {
+      // Preload voices
+      window.speechSynthesis.getVoices();
+    }
     return () => {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -97,6 +101,13 @@ export default function MaterialView() {
 
       const utterance = new SpeechSynthesisUtterance(textToRead);
       utterance.lang = 'id-ID';
+      
+      const voices = window.speechSynthesis.getVoices();
+      const idVoice = voices.find(v => v.lang === 'id-ID' || v.lang === 'id_ID' || v.lang.startsWith('id'));
+      if (idVoice) {
+        utterance.voice = idVoice;
+      }
+      
       utterance.rate = 0.9;
       
       utterance.onend = () => {

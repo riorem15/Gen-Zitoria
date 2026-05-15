@@ -89,16 +89,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="lg:w-1/3 flex justify-center">
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-primary to-secondary rounded-[40px] flex items-center justify-center shadow-2xl relative"
-            >
-              <div className="absolute inset-0 bg-white/10 rounded-[40px] backdrop-blur-sm transform rotate-6 scale-95 -z-10"></div>
-              <span className="material-symbols-outlined text-9xl text-white drop-shadow-2xl">history_edu</span>
-            </motion.div>
-          </div>
+
         </div>
       </div>
 
