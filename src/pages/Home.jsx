@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { historyPhases } from '../data/historyContent';
 import { Lock, Unlock, PlayCircle, Target, CheckCircle2, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 import AIAnalysis from '../components/dashboard/AIAnalysis';
 
 export default function Home() {
