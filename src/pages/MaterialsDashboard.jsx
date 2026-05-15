@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { historyPhases } from '../data/historyContent';
-import { Lock, Unlock, PlayCircle, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
+import { Lock, Unlock, PlayCircle, ChevronDown, ChevronUp, BookOpen, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MaterialsDashboard() {

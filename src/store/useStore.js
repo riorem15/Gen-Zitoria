@@ -142,23 +142,23 @@ export const useStore = create((set, get) => ({
 
       if (data && !error) {
         // Parse JSON fields safely
-        const moduleProgress = data.module_progress
+        const moduleProgress = typeof data.module_progress === 'string'
           ? JSON.parse(data.module_progress)
-          : get().moduleProgress;
-        const completedPhases = data.completed_phases
+          : (data.module_progress ?? get().moduleProgress);
+        const completedPhases = typeof data.completed_phases === 'string'
           ? JSON.parse(data.completed_phases)
-          : [];
+          : (data.completed_phases ?? []);
 
         set({
-          points: data.points || 0,
-          gamePoints: data.game_points || 0,
-          bestStreak: data.best_streak || 0,
-          profileName: data.profile_name || '',
-          profileProvince: data.profile_province || '',
-          profileCountry: data.profile_country || 'Indonesia',
-          profileAvatar: data.profile_avatar || 'cat',
-          hasSeenTutorial: data.has_seen_tutorial || false,
-          initialLevel: data.initial_level || null,
+          points: data.points ?? 0,
+          gamePoints: data.game_points ?? 0,
+          bestStreak: data.best_streak ?? 0,
+          profileName: data.profile_name ?? '',
+          profileProvince: data.profile_province ?? '',
+          profileCountry: data.profile_country ?? 'Indonesia',
+          profileAvatar: data.profile_avatar ?? 'cat',
+          hasSeenTutorial: data.has_seen_tutorial ?? false,
+          initialLevel: data.initial_level ?? null,
           moduleProgress,
           completedPhases,
         });

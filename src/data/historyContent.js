@@ -1,8 +1,8 @@
 export const historyPhases = [
   {
-    id: "fase_e_awal",
-    title: "Fase E Awal",
-    description: "Dasar Sejarah & Masa Praaksara",
+    id: "fase_e",
+    title: "Fase E: Indonesia Masa Praaksara hingga Kerajaan Islam",
+    description: "Mempelajari akar sejarah, asal usul leluhur, masa praaksara, hingga kejayaan kerajaan Hindu-Buddha dan Islam di Nusantara.",
     chapters: [
       {
         id: "chap_1",
@@ -130,14 +130,7 @@ export const historyPhases = [
           <p>Menganalisis bagaimana tradisi megalitik masih bertahan di beberapa daerah di Indonesia (Living Megalithic), membuktikan kekuatan akar budaya asli kita.</p>
           `
         }
-      }
-    ]
-  },
-  {
-    id: "fase_e_akhir_f_awal",
-    title: "Fase E Akhir / F Awal",
-    description: "Kerajaan Hindu-Buddha & Islam",
-    chapters: [
+      },
       {
         id: "chap_4",
         title: "Kerajaan Hindu-Buddha",
@@ -161,7 +154,7 @@ export const historyPhases = [
           `,
           2: `
             <h2>🔬 Geopolitik dan Ekonomi Klasik</h2>
-          <p>Analisis mengenai hubungan dagang antara Nusantara, Tiongkok, dan India. Nusantara berfungsi sebagai <em>Entrepôt</em> global yang sangat penting.</p>
+          <p>Analisis mengenai hubungan dagang antara Nusantara, Tiongkok, and India. Nusantara berfungsi sebagai <em>Entrepôt</em> global yang sangat penting.</p>
           <h3>1. Birokrasi Majapahit</h3>
           <p>Mempelajari sistem administrasi Majapahit yang tercatat dalam kitab Negarakertagama, menunjukkan tata kelola negara yang sangat maju pada masanya.</p>
           <h3>2. Sinkretisme Agama</h3>
@@ -171,7 +164,7 @@ export const historyPhases = [
             <h2>🎓 Politik Memori dan Identitas Nasional</h2>
           <p>Mengkaji bagaimana sejarah Majapahit dan Sriwijaya digunakan oleh para pendiri bangsa untuk membangun semangat nasionalisme Indonesia modern.</p>
           <h3>1. Warisan Budaya Abadi</h3>
-          <p>Analisis mengenai tata ruang, hukum, dan kesenian masa klasik yang masih menjadi DNA budaya Indonesia hingga hari ini.</p>
+          <p>Analisis mengenai tata ruang, hukum, and kesenian masa klasik yang masih menjadi DNA budaya Indonesia hingga hari ini.</p>
           `
         }
       },
@@ -182,25 +175,25 @@ export const historyPhases = [
         contentByLevel: {
           0: `
             <h2>🌙 Cahaya Islam di Nusantara</h2>
-          <p>Setelah masa Hindu-Buddha, datanglah ajaran Islam yang dibawa oleh pedagang Arab, Persia, dan Gujarat. Islam menyebar dengan damai melalui perdagangan, perkawinan, dan seni yang indah.</p>
+          <p>Setelah masa Hindu-Buddha, datanglah ajaran Islam yang dibawa oleh pedagang Arab, Persia, dan Gujarat. Islam menyebar dengan damai melalui perdagangan, perkawinan, and seni yang indah.</p>
           <h3>1. Wali Songo yang Cerdas 🎨</h3>
           <p>Di Jawa, ada sembilan tokoh hebat yang menyebarkan Islam lewat budaya, seperti Sunan Kalijaga yang menggunakan Wayang Kulit. Rakyat pun senang belajar Islam.</p>
           <h3>2. Kesultanan Besar 🕋</h3>
-          <p>Berdiri kesultanan hebat seperti Samudera Pasai, Demak, Banten, Gowa-Tallo, sampai Ternate-Tidore. Mereka sangat peduli pada rakyat dan perdagangan.</p>
+          <p>Berdiri kesultanan hebat seperti Samudera Pasai, Demak, Banten, Gowa-Tallo, sampai Ternate-Tidore. Mereka sangat peduli pada rakyat and perdagangan.</p>
           `,
           1: `
             <h2>🕌 Egalitarianisme dan Transformasi Sosial</h2>
           <p>Islam membawa konsep bahwa semua manusia setara di mata Tuhan, yang memicu "demokratisasi" budaya di Nusantara. Penghapusan kasta membuat Islam mudah diterima masyarakat luas.</p>
           <h3>1. Saluran Islamisasi</h3>
-          <p>Penyebaran melalui jalur Perdagangan, Perkawinan, Pendidikan (Pesantren), Dakwah, dan Kesenian.</p>
+          <p>Penyebaran melalui jalur Perdagangan, Perkawinan, Pendidikan (Pesantren), Dakwah, and Kesenian.</p>
           <h3>2. Akulturasi Arsitektur</h3>
-          <p>Masjid dengan atap tumpang dan menara mirip candi membuktikan harmoni antara ajaran Islam dengan budaya lokal.</p>
+          <p>Masjid dengan atap tumpang and menara mirip candi membuktikan harmoni antara ajaran Islam dengan budaya lokal.</p>
           `,
           2: `
             <h2>🔬 Jaringan Intelektual dan Ekonomi Syariah awal</h2>
-          <p>Analisis mengenai hubungan Kesultanan di Nusantara dengan pusat Islam dunia seperti Mekkah dan Istanbul. Munculnya jaringan ulama global yang sangat berpengaruh.</p>
+          <p>Analisis mengenai hubungan Kesultanan di Nusantara dengan pusat Islam dunia seperti Mekkah and Istanbul. Munculnya jaringan ulama global yang sangat berpengaruh.</p>
           <h3>1. Maritimisme Islam</h3>
-          <p>Kesultanan Makassar dan Aceh menjadi pusat perdagangan internasional yang menyaingi monopoli bangsa Eropa.</p>
+          <p>Kesultanan Makassar and Aceh menjadi pusat perdagangan internasional yang menyaingi monopoli bangsa Eropa.</p>
           <h3>2. Sastra Suluk dan Tasawuf</h3>
           <p>Mempelajari dimensi spiritual Islam yang diungkapkan melalui karya sastra Melayu-Arab yang sangat kaya.</p>
           `,
@@ -208,16 +201,16 @@ export const historyPhases = [
             <h2>🎓 Islam sebagai Pilar Nasionalisme</h2>
           <p>Mengkaji bagaimana identitas Islam menjadi perekat persatuan bangsa dalam menghadapi kolonialisme Barat yang mulai datang.</p>
           <h3>1. Historiografi Islam Nusantara</h3>
-          <p>Menekankan peran ulama dan santri dalam perjuangan fisik maupun intelektual mempertahankan kedaulatan tanah air.</p>
+          <p>Menekankan peran ulama and santri dalam perjuangan fisik maupun intelektual mempertahankan kedaulatan tanah air.</p>
           `
         }
       }
     ]
   },
   {
-    id: "fase_f_akhir",
-    title: "Fase F Akhir",
-    description: "Kolonialisme & Kemerdekaan",
+    id: "fase_f",
+    title: "Fase F: Kolonialisme hingga Proklamasi Kemerdekaan",
+    description: "Menganalisis masa penjajahan bangsa Eropa, perlawanan rakyat, hingga detik-detik proklamasi 1945.",
     chapters: [
       {
         id: "chap_6",

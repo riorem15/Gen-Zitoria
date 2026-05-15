@@ -5,15 +5,13 @@ import { historyPhases } from '../../data/historyContent';
 import { Lock, CheckCircle2, ChevronRight, Star } from 'lucide-react';
 
 const phaseMap = {
-  'fase_e_awal': 'fase_e',
-  'fase_e_akhir_f_awal': 'fase_f',
-  'fase_f_akhir': null,
+  'fase_e': 'fase_e',
+  'fase_f': 'fase_f',
 };
 
 const evalPhaseMap = {
-  'fase_e_awal': null,
-  'fase_e_akhir_f_awal': 'fase_e',
-  'fase_f_akhir': 'fase_f',
+  'fase_e': 'fase_e',
+  'fase_f': 'fase_f',
 };
 
 export default function EvaluationHub() {
