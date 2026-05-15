@@ -47,19 +47,64 @@ export default function Home() {
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary rounded-full mix-blend-multiply filter blur-[150px] opacity-10 pointer-events-none"></div>
 
-      <div className="glass-panel p-8 md:p-12 relative overflow-hidden">
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-black mb-4">
-              <span className="text-gen">Jelajahi</span> Waktu.
+      {/* HERO SECTION / WELCOME */}
+      <div className="glass-panel p-8 md:p-16 relative overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5 border-2 border-primary/20">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] -mr-40 -mt-40"></div>
+        
+        <div className="relative z-10 flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex-1 space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-black uppercase tracking-widest">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Selamat Datang di Masa Depan Pembelajaran Sejarah
+            </div>
+            
+            <h2 className="text-4xl md:text-6xl font-black leading-tight">
+              Zitora: <span className="text-gen">Adaptasi</span> Menembus Batas Waktu.
             </h2>
-            <p className="text-lg md:text-xl text-on-surface opacity-80 max-w-2xl">
-              Level Awalmu: <strong className="text-primary">Level {initialLevel}</strong>. 
-              Mulai perjalanan kronologismu dari awal masa praaksara hingga era reformasi modern.
-            </p>
+            
+            <div className="space-y-4 text-on-surface/80 text-lg leading-relaxed max-w-3xl">
+              <p>
+                Selama puluhan tahun, pembelajaran sejarah sering dianggap membosankan—hanya sekadar menghafal angka tahun dan nama tokoh yang statis. Masalah utama pendidikan sejarah kita adalah <strong>kurangnya relevansi kognitif</strong> dan <strong>metodologi yang pasif</strong>.
+              </p>
+              <p>
+                <strong>Zitora (Gen-Zitoria)</strong> hadir sebagai solusi revolusioner. Dengan mengintegrasikan <em>Bloom's Taxonomy</em> dan teori <em>Zone of Proximal Development (ZPD)</em>, kami menciptakan ekosistem belajar yang <strong>adaptif</strong>. Kami tidak hanya memberikan data, tapi melatih kemampuan berpikir kritis (HOTS) melalui narasi yang mendalam dan gamifikasi interaktif.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <div className="bg-surface/80 backdrop-blur-sm p-4 rounded-2xl border border-glass-border flex items-center gap-3 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                  <Target className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs opacity-50 font-bold uppercase tracking-tighter">Level Awalmu</div>
+                  <div className="font-black text-primary text-xl">Level {initialLevel}</div>
+                </div>
+              </div>
+              <div className="bg-surface/80 backdrop-blur-sm p-4 rounded-2xl border border-glass-border flex items-center gap-3 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary">
+                  <PlayCircle className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs opacity-50 font-bold uppercase tracking-tighter">Mulai Belajar</div>
+                  <div className="font-black text-secondary text-xl">Fase E Awal</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="w-32 h-32 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-lg animate-float shrink-0">
-            <span className="material-symbols-outlined text-6xl text-white">public</span>
+
+          <div className="lg:w-1/3 flex justify-center">
+            <motion.div 
+              animate={{ y: [0, -20, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-primary to-secondary rounded-[40px] flex items-center justify-center shadow-2xl relative"
+            >
+              <div className="absolute inset-0 bg-white/10 rounded-[40px] backdrop-blur-sm transform rotate-6 scale-95 -z-10"></div>
+              <span className="material-symbols-outlined text-9xl text-white drop-shadow-2xl">history_edu</span>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -73,15 +118,18 @@ export default function Home() {
         </div>
         <div className="flex justify-between items-end mb-4 relative z-10">
           <h3 className="text-xl font-bold flex items-center gap-2">
-            <Target className="w-5 h-5 text-secondary" /> Misi Harian
+            <Target className="w-5 h-5 text-secondary" /> Misi Harian Aktif
           </h3>
-          <div className="text-xs font-bold opacity-60">Reset dalam 14:22:00</div>
+          <div className="text-xs font-bold opacity-60">Reward instan berupa poin & kenaikan ZPD</div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
           {dailyQuests.map(q => (
-            <div key={q.id} className="bg-surface/50 p-4 rounded-xl border border-glass-border flex flex-col gap-2">
+            <div key={q.id} className="bg-surface/50 p-4 rounded-xl border border-glass-border flex flex-col gap-2 transition-all hover:border-secondary/50">
               <div className="flex justify-between items-start">
-                <span className={`font-bold text-sm ${q.isCompleted ? 'text-green-500' : 'text-on-surface'}`}>{q.title}</span>
+                <div className="flex flex-col">
+                  <span className={`font-bold text-sm ${q.isCompleted ? 'text-green-500' : 'text-on-surface'}`}>{q.title}</span>
+                  <span className="text-[10px] text-primary font-bold">+{q.reward} Poin</span>
+                </div>
                 {q.isCompleted && <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />}
               </div>
               <div className="w-full bg-glass-border h-1.5 rounded-full overflow-hidden mt-auto">
@@ -101,7 +149,7 @@ export default function Home() {
           </h3>
           <div className="flex flex-wrap gap-4">
             {unlockedBadges.map((badge, idx) => (
-              <div key={idx} className="bg-orange-500/10 border border-orange-500/20 text-orange-500 font-bold text-sm px-4 py-2 rounded-xl flex items-center gap-2">
+              <div key={idx} className="bg-orange-500/10 border border-orange-500/20 text-orange-500 font-bold text-sm px-4 py-2 rounded-xl flex items-center gap-2 shadow-sm">
                 <Award className="w-4 h-4" /> {badge}
               </div>
             ))}
@@ -109,7 +157,7 @@ export default function Home() {
         </div>
       )}
 
-      <div className="space-y-12">
+      <div className="space-y-12 pb-20">
         {historyPhases.map((phase, pIndex) => {
           const phaseProgress = getPhaseProgress(phase.chapters);
           
@@ -139,21 +187,21 @@ export default function Home() {
               {/* Chapters Carousel/Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {phase.chapters.map((chapter, cIndex) => {
-                  const isLocked = checkIsLocked(pIndex, cIndex);
+                  const isLocked = false; // Chapters are unlocked within phase as requested
                   const isCompleted = moduleProgress[chapter.id]?.isCompleted;
                   
                   return (
                     <div 
                       key={chapter.id}
                       onClick={() => handleStartChapter(phase.id, chapter.id, isLocked)}
-                      className={`glass-panel p-6 flex flex-col transition-all duration-300 ${isLocked ? 'opacity-60 grayscale-[50%] cursor-not-allowed' : 'hover:-translate-y-2 hover:shadow-xl cursor-pointer group'}`}
+                      className={`glass-panel p-6 flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer group hover:border-primary/50`}
                     >
                       <div className="flex justify-between items-start mb-4">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center shadow-md ${isCompleted ? 'bg-green-500 text-white' : isLocked ? 'bg-surface-variant text-on-surface-variant' : 'bg-gradient-to-br from-primary to-secondary text-white'}`}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center shadow-md ${isCompleted ? 'bg-green-500 text-white' : 'bg-gradient-to-br from-primary to-secondary text-white'}`}>
                           {isCompleted ? <span className="material-symbols-outlined text-xl">check</span> : (cIndex + 1)}
                         </div>
                         <div className="p-2 bg-surface/50 rounded-lg backdrop-blur-sm">
-                          {isLocked ? <Lock className="w-5 h-5 text-on-surface opacity-50" /> : <Unlock className="w-5 h-5 text-primary" />}
+                          <Unlock className="w-5 h-5 text-primary" />
                         </div>
                       </div>
                       
@@ -161,17 +209,10 @@ export default function Home() {
                       <p className="text-sm opacity-70 mb-6 flex-1 line-clamp-3">{chapter.summary}</p>
                       
                       <div className="mt-auto">
-                        {!isLocked && (
-                          <button className="w-full py-2 rounded-xl bg-surface/80 hover:bg-surface text-primary font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white">
-                            <PlayCircle className="w-5 h-5" />
-                            {isCompleted ? 'Baca Ulang' : 'Mulai Baca'}
-                          </button>
-                        )}
-                        {isLocked && (
-                          <button className="w-full py-2 rounded-xl bg-surface/30 text-on-surface opacity-50 font-bold cursor-not-allowed flex items-center justify-center gap-2">
-                            <Lock className="w-4 h-4" /> Terkunci
-                          </button>
-                        )}
+                        <button className="w-full py-2 rounded-xl bg-surface/80 hover:bg-surface text-primary font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white">
+                          <PlayCircle className="w-5 h-5" />
+                          {isCompleted ? 'Baca Ulang' : 'Mulai Baca'}
+                        </button>
                       </div>
                     </div>
                   );
@@ -181,6 +222,58 @@ export default function Home() {
           );
         })}
       </div>
+
+      {/* FOOTER SECTION */}
+      <footer className="mt-20 border-t border-glass-border pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="space-y-6">
+            <h4 className="text-2xl font-black text-gen">Gen Zitoria</h4>
+            <p className="text-on-surface opacity-70 leading-relaxed">
+              Zitoria adalah platform pembelajaran sejarah adaptif yang dirancang khusus untuk generasi masa kini. 
+              Menggabungkan kecerdasan buatan, gamifikasi, dan kurikulum sejarah yang mendalam untuk menciptakan 
+              pengalaman belajar yang tak terlupakan.
+            </p>
+          </div>
+          
+          <div className="space-y-6">
+            <h5 className="text-lg font-bold">Kontak Kami</h5>
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3 text-on-surface/70 hover:text-primary transition-colors cursor-pointer">
+                <div className="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined text-sm">alternate_email</span>
+                </div>
+                <span>2288230033@untirta.ac.id</span>
+              </li>
+              <li className="flex items-center gap-3 text-on-surface/70 hover:text-primary transition-colors cursor-pointer" onClick={() => window.open('https://instagram.com/Riorem15', '_blank')}>
+                <div className="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined text-sm">photo_camera</span>
+                </div>
+                <span>@Riorem15</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-6">
+            <h5 className="text-lg font-bold">Alamat & Lokasi</h5>
+            <div className="bg-surface/50 p-6 rounded-2xl border border-glass-border space-y-4">
+              <div className="flex gap-3">
+                <span className="material-symbols-outlined text-primary">location_on</span>
+                <p className="text-sm text-on-surface/70">FKIP UNTIRTA CIWARU, Serang, Banten, Indonesia.</p>
+              </div>
+              <button 
+                onClick={() => window.open('https://maps.google.com/?q=FKIP+UNTIRTA+CIWARU', '_blank')}
+                className="w-full py-3 rounded-xl bg-primary text-white font-black text-sm hover:scale-105 transition-all"
+              >
+                Kunjungi Alamat
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-16 pt-8 border-t border-glass-border/50 text-center text-xs opacity-50 font-medium">
+          © 2026 Gen Zitoria. Crafted with Passion for Historical Education Excellence.
+        </div>
+      </footer>
     </div>
   );
 }

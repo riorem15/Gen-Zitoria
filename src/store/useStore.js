@@ -80,27 +80,40 @@ export const useStore = create((set, get) => ({
 
   // Daily Quests
   dailyQuests: [
-    { id: 1, title: 'Buka 1 Materi Baru', isCompleted: false, current: 0, target: 1 },
-    { id: 2, title: 'Jawab Benar 3 Soal', isCompleted: false, current: 0, target: 3 },
-    { id: 3, title: 'Selesaikan Flashcards', isCompleted: false, current: 0, target: 1 },
+    { id: 1, title: 'Buka 1 Materi Baru', isCompleted: false, current: 0, target: 1, reward: 100 },
+    { id: 2, title: 'Jawab Benar 5 Soal (Streak)', isCompleted: false, current: 0, target: 5, reward: 300 },
+    { id: 3, title: 'Jawab Benar 10 Soal (Streak)', isCompleted: false, current: 0, target: 10, reward: 600 },
+    { id: 4, title: 'Selesaikan Flashcards', isCompleted: false, current: 0, target: 1, reward: 200 },
   ],
   unlockedBadges: [],
 
   updateQuestProgress: (questId, increment = 1) => set((state) => {
+    let pointsEarned = 0;
     const updatedQuests = state.dailyQuests.map(q => {
       if (q.id === questId && !q.isCompleted) {
         const newCurrent = q.current + increment;
         const isCompleted = newCurrent >= q.target;
+        if (isCompleted) pointsEarned += q.reward;
         return { ...q, current: Math.min(newCurrent, q.target), isCompleted };
       }
       return q;
     });
+
     const completedCount = updatedQuests.filter(q => q.isCompleted).length;
     let newBadges = [...state.unlockedBadges];
-    if (completedCount === 3 && !newBadges.includes('Pahlawan Harian')) {
+    if (completedCount === state.dailyQuests.length && !newBadges.includes('Pahlawan Harian')) {
       newBadges.push('Pahlawan Harian');
     }
-    return { dailyQuests: updatedQuests, unlockedBadges: newBadges };
+
+    if (pointsEarned > 0) {
+      setTimeout(() => get().syncStats(), 100);
+    }
+
+    return { 
+      dailyQuests: updatedQuests, 
+      unlockedBadges: newBadges,
+      points: state.points + pointsEarned
+    };
   }),
 
   unlockBadge: (badgeName) => set((state) => {

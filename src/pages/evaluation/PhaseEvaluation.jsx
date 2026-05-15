@@ -104,29 +104,83 @@ export default function PhaseEvaluation({ phaseId }) {
       setIsAnswered(false);
     } else {
       if (matchQ) setPhase('matching');
-      else setPhase('result');
+      else handleShowResult();
     }
   };
 
-  const handleMatchDone = (got, total) => {
-    setMatchScore(got);
-    addGamePoints(got * 50);
-    setPhase('result');
-  };
+
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const finalCorrect = correctCount + matchScore;
   const finalScore = Math.round((finalCorrect / totalQ) * 100);
   const passed = finalScore >= evalData.passingScore;
 
-  const getLabel = () => {
-    if (finalScore >= evalData.excellentScore) return { text: 'TERBAIK', color: 'text-yellow-500' };
-    if (finalScore >= evalData.goodScore) return { text: 'BAIK', color: 'text-green-500' };
-    if (finalScore >= evalData.passingScore) return { text: 'CUKUP', color: 'text-blue-500' };
-    return { text: 'PERLU BELAJAR LAGI', color: 'text-red-500' };
+  const getPerformanceFeedback = () => {
+    if (finalScore >= 95) {
+      return `Luar biasa! Kamu sudah menguasai materi ini di atas 98% pengguna Zitora lainnya. Pengetahuanmu tentang ${phaseId === 'fase_e' ? 'Praaksara hingga Islam' : 'Kolonialisme hingga Modern'} sangat mendalam!`;
+    }
+    if (finalScore >= 85) {
+      return `Bagus sekali! Kamu berada di kelompok 15% pengguna teratas. Sedikit lagi menuju sempurna, kamu hanya perlu mempertajam detail pada beberapa bagian.`;
+    }
+    if (finalScore >= 70) {
+      return `Selamat, kamu Lulus! Kamu sudah melampaui ambang batas. Namun, kami menyarankan kamu mengulas kembali bagian yang salah untuk benar-benar menguasai fase ini sebelum lanjut ke fase berikutnya.`;
+    }
+    return `Kamu belum berhasil mencapai ambang batas kelulusan. Jangan menyerah! Nilaimu saat ini berada di bawah rata-rata pengguna. Fokuslah pada materi yang belum kamu kuasai dan coba lagi.`;
   };
 
+  const handleShowResult = () => {
+    setIsAnalyzing(true);
+    setTimeout(() => {
+      setIsAnalyzing(false);
+      setPhase('result');
+    }, 2500);
+  };
+
+  const handleMatchDone = (got, total) => {
+    setMatchScore(got);
+    addGamePoints(got * 50);
+    handleShowResult();
+  };
+
+  if (isAnalyzing) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 text-center space-y-6">
+        <motion.div
+          animate={{
+            rotate: [0, 10, -10, 10, 0],
+            scale: [1, 1.1, 1, 1.1, 1],
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="relative"
+        >
+          <div className="w-24 h-24 rounded-full border-4 border-primary/20 flex items-center justify-center bg-primary/5">
+            <svg viewBox="0 0 24 24" className="w-12 h-12 text-primary" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+          <motion.div
+            animate={{ opacity: [0.2, 1, 0.2] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="absolute -top-2 -right-2 bg-secondary text-white text-[10px] font-black px-2 py-1 rounded-full shadow-lg"
+          >
+            AI ANALYZING
+          </motion.div>
+        </motion.div>
+        <div className="space-y-2">
+          <h3 className="text-xl font-black">Menganalisis Performa...</h3>
+          <p className="text-sm opacity-60 max-w-xs mx-auto">Algoritma Zitora sedang memproses jawabanmu untuk memberikan feedback yang akurat.</p>
+        </div>
+      </div>
+    );
+  }
+
   if (phase === 'result') {
-    const label = getLabel();
+    const label = (finalScore >= evalData.excellentScore) ? { text: 'TERBAIK', color: 'text-yellow-500' } :
+                  (finalScore >= evalData.goodScore) ? { text: 'BAIK', color: 'text-green-500' } :
+                  (finalScore >= evalData.passingScore) ? { text: 'CUKUP', color: 'text-blue-500' } :
+                  { text: 'PERLU BELAJAR LAGI', color: 'text-red-500' };
+
     if (passed) markPhaseComplete(phaseId);
     const stamp = phaseId === 'fase_e' ? STAMP_E : STAMP_F;
 
@@ -136,32 +190,47 @@ export default function PhaseEvaluation({ phaseId }) {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 pointer-events-none"/>
           <Trophy className="w-16 h-16 text-yellow-400 mx-auto mb-4"/>
           <h2 className="text-3xl font-black mb-1">{evalData.title}</h2>
-          <p className="text-5xl font-black my-4 text-primary">{finalScore}<span className="text-2xl">/100</span></p>
-          <p className={`text-xl font-black mb-2 ${label.color}`}>{label.text}</p>
-          <p className="text-sm opacity-60 mb-6">{finalCorrect} dari {totalQ} soal benar</p>
+          
+          <div className="my-6">
+            <p className="text-5xl font-black text-primary">{finalScore}<span className="text-2xl">/100</span></p>
+            <p className={`text-xl font-black mt-2 ${label.color}`}>{label.text}</p>
+          </div>
+
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6 text-left">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"/>
+              <span className="text-[10px] font-black tracking-widest opacity-50 uppercase">Analisis Performa</span>
+            </div>
+            <p className="text-sm leading-relaxed opacity-90">{getPerformanceFeedback()}</p>
+          </div>
+
+          <p className="text-xs opacity-50 mb-6">{finalCorrect} dari {totalQ} soal dijawab dengan benar</p>
 
           {passed && (
             <motion.div initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: -15 }}
               transition={{ type: 'spring', stiffness: 200 }}
-              className="mx-auto mb-6 w-fit opacity-90">
+              className="mx-auto mb-8 w-fit opacity-90 drop-shadow-2xl">
               {stamp}
             </motion.div>
           )}
 
           {!passed && (
-            <p className="text-sm opacity-70 mb-6 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
-              Nilai minimal untuk lulus adalah <strong>{evalData.passingScore}</strong>. Pelajari kembali materinya!
-            </p>
+            <div className="mb-6 p-4 rounded-xl bg-red-500/5 border border-red-500/20 text-left">
+              <p className="text-xs font-bold text-red-500 mb-1">AMBANG BATAS BELUM TERCAPAI</p>
+              <p className="text-xs opacity-70">
+                Kamu memerlukan minimal skor <strong>{evalData.passingScore}</strong> untuk membuka fase berikutnya. Silakan ulas materi kembali.
+              </p>
+            </div>
           )}
 
-          <div className="flex flex-col gap-3">
-            <button onClick={() => navigate('/evaluation')} className="px-8 py-3 rounded-xl bg-glass border border-glass-border font-bold hover:bg-white/10 transition-all">
-              Kembali ke Evaluasi
+          <div className="flex flex-col gap-3 relative z-10">
+            <button onClick={() => navigate('/evaluation')} className="px-8 py-3 rounded-xl bg-glass border border-glass-border font-bold hover:bg-white/10 transition-all text-sm">
+              Kembali ke Menu Evaluasi
             </button>
             {!passed && (
               <button onClick={() => { setCurrentIndex(0); setSelected(null); setIsAnswered(false); setCorrectCount(0); setMatchScore(0); setPhase('quiz'); }}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold flex items-center justify-center gap-2">
-                <RotateCcw className="w-4 h-4"/> Coba Lagi
+                className="px-8 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold flex items-center justify-center gap-2 text-sm shadow-lg shadow-primary/20">
+                <RotateCcw className="w-4 h-4"/> Coba Ujian Lagi
               </button>
             )}
           </div>
