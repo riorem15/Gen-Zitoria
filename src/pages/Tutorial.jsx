@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { BookOpen, Flame, Medal, ArrowRight, Instagram, Mail, MapPin } from 'lucide-react';
+import { BookOpen, Flame, Medal, ArrowRight, Camera, Mail, MapPin } from 'lucide-react';
 
 const Tutorial = () => {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ const Tutorial = () => {
             <span className="hidden md:inline text-purple-300 opacity-50">|</span>
             
             <a href="https://instagram.com/Riorem15" target="_blank" rel="noreferrer" className="hover:text-purple-200 flex items-center gap-1.5 transition-colors">
-              <Instagram className="w-4 h-4" /> @Riorem15
+              <Camera className="w-4 h-4" /> @Riorem15
             </a>
             
             <span className="hidden md:inline text-purple-300 opacity-50">|</span>
