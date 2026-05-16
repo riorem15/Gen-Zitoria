@@ -107,7 +107,9 @@ export const i18n = {
 
 // ─── Font size helpers ────────────────────────────────────────────────────────
 function applyFontSize(size) {
-  document.documentElement.setAttribute('data-font-size', size);
+  // Remove previous size classes from body
+  document.body.classList.remove('font-size-sm', 'font-size-md', 'font-size-lg');
+  document.body.classList.add(`font-size-${size}`);
   localStorage.setItem('fontSize', size);
 }
 
@@ -389,4 +391,4 @@ export const useStore = create((set, get) => ({
 
 // Apply saved font size on initial load
 const savedFontSize = localStorage.getItem('fontSize') || 'md';
-document.documentElement.setAttribute('data-font-size', savedFontSize);
+document.body.classList.add(`font-size-${savedFontSize}`);
