@@ -6,202 +6,169 @@ export const historyPhases = [
     chapters: [
       {
         id: "chap_1",
-        title: "Konsep Dasar Sejarah",
+        title: "Pengantar Ilmu Sejarah",
         summary: "Pahami apa itu sejarah, cara berpikir diakronis & sinkronis, serta bagaimana ruang dan waktu mengikat peristiwa.",
         contentByLevel: {
           0: `
             <h2>👋 Selamat Datang, Calon Penjelajah Waktu!</h2>
-          <p>Pernahkah kamu membayangkan bahwa setiap langkah yang kita ambil hari ini adalah hasil dari ribuan tahun perjalanan nenek moyang kita? Sejarah bukan hanya tentang menghafal tahun-tahun yang membosankan di buku teks. Sejarah adalah <strong>peta harta karun</strong> yang ditinggalkan oleh orang-orang sebelum kita agar kita tahu ke mana harus melangkah di masa depan.</p>
-          <p>Sejarah membantu kita mengerti mengapa dunia seperti sekarang. Kenapa kita bicara bahasa Indonesia? Kenapa kita merayakan hari kemerdekaan? Kenapa ada gedung-gedung tua di tengah kota? Semua itu punya cerita, dan cerita itulah yang kita sebut sejarah. Belajar sejarah itu seru karena kita seperti menonton film yang benar-benar terjadi, dengan pahlawan, penjahat, dan keajaiban yang nyata.</p>
-          <h3>1. Mengapa Namanya "Sejarah"? 🌳</h3>
-          <p>Unik sekali, kata "Sejarah" sebenarnya berasal dari bahasa Arab, yaitu <em>Syajarotun</em>. Artinya adalah <strong>POHON</strong>. Mengapa pohon? Coba kamu lihat pohon di halaman rumahmu. Ada akar yang tertanam jauh di bawah tanah (masa lalu), ada batang yang tegak berdiri (masa kini), dan ada cabang serta ranting yang terus tumbuh ke atas (masa depan). Sejarah itu persis seperti itu! Setiap peristiwa saling terhubung, dari akar sampai ke pucuk daun terkecil.</p>
-          <h3>2. Tiga Kunci Utama Sejarah 🗝️</h3>
-          <p>Agar sebuah cerita bisa disebut sebagai sejarah, harus ada tiga elemen penting ini:</p>
-          <ul>
-            <li><strong>Manusia:</strong> Sejarah adalah cerita tentang kita, manusia. Kita adalah pelaku utama, pembuat perubahan, dan juga saksi dari semua drama di dunia ini.</li>
-            <li><strong>Ruang:</strong> Ini adalah tempat kejadiannya. Tempat menentukan bagaimana sebuah peristiwa terjadi.</li>
-            <li><strong>Waktu:</strong> Ini adalah bumbu paling penting. Sejarah selalu punya tanggal, jam, atau minimal era.</li>
-          </ul>
-          <h3>3. Cara Berpikir Detektif Sejarah 🕵️</h3>
-          <p>Ada dua cara keren untuk melihat sebuah peristiwa sejarah: <strong>Garis Waktu (Diakronik)</strong> yang melihat urutan kejadian, dan <strong>Foto Detail (Sinkronis)</strong> yang meneliti suasana di satu waktu secara mendalam.</p>
+            <p>Sejarah bukan sekadar hafalan tanggal, tapi peta harta karun masa lalu! Dengan belajar sejarah, kita tahu dari mana kita berasal dan ke mana kita akan melangkah. Tiga kunci utama sejarah adalah <strong>Manusia</strong> (pelaku), <strong>Ruang</strong> (tempat), dan <strong>Waktu</strong> (kapan terjadinya).</p>
           `,
           1: `
             <h2>🔍 Memahami Fondasi Ilmu Sejarah</h2>
-          <p>Sejarah seringkali disalahartikan sebagai sekadar kronik atau catatan tanggal-tanggal penting. Namun, sejarah harus dipandang sebagai sebuah ilmu yang sistematis untuk memahami eksistensi manusia dalam lintasan waktu. Secara etimologis, sejarah berakar dari kata <em>Syajarotun</em> (Arab) yang berarti pohon, melambangkan pertumbuhan silsilah yang terus berkembang secara dinamis.</p>
-          <h3>1. Definisi Multidimensional Sejarah</h3>
-          <p>Dalam studi akademik, sejarah dipahami dalam beberapa sudut pandang: Sejarah sebagai Peristiwa (objektif), Sejarah sebagai Kisah (narasi), Sejarah sebagai Ilmu (metodis), dan Sejarah sebagai Seni (estetika narasi).</p>
-          <h3>2. Pilar Utama: Manusia, Ruang, dan Waktu</h3>
-          <p>Ketiga unsur ini saling mengunci. Manusia sebagai aktor, Ruang sebagai latar geografis, dan Waktu sebagai dimensi temporal. Ketiganya membentuk fakta sejarah yang tidak terbantahkan.</p>
-          <h3>3. Periodisasi dan Kronologi</h3>
-          <p>Periodisasi adalah pembabakan waktu untuk mempermudah pemahaman, sementara Kronologi adalah urutan waktu terjadinya peristiwa. Keduanya penting agar kita tidak terjebak dalam <em>Anakronisme</em> (kesalahan penempatan waktu).</p>
+            <p>Sejarah berakar dari kata <em>Syajarotun</em> (Arab) yang berarti pohon, melambangkan silsilah. Kita mempelajari sejarah sebagai peristiwa, kisah, ilmu, dan seni. Memahami konsep Diakronik (memanjang dalam waktu) dan Sinkronik (meluas dalam ruang) sangat penting untuk menghindari anakronisme.</p>
           `,
           2: `
-            <h2>🔬 Analisis Epistemologi dan Metodologi Sejarah</h2>
-          <p>Pada tingkat expert, kita mempelajari bagaimana sebuah fakta sejarah dikonstruksi. Sejarah bukan sekadar "apa yang terjadi", tapi "bagaimana kita tahu apa yang terjadi". Ini melibatkan kritik sumber yang sangat ketat.</p>
-          <h3>1. Heuristik dan Verifikasi</h3>
-          <p>Heuristik adalah tahap mencari sumber, baik primer maupun sekunder. Verifikasi terbagi menjadi Kritik Ekstern (menguji keaslian fisik) dan Kritik Intern (menguji kebenaran isi). Seorang sejarawan harus bersikap skeptis terhadap setiap sumber.</p>
-          <h3>2. Interpretasi dan Historiografi</h3>
-          <p>Interpretasi adalah menafsirkan fakta-fakta yang telah diverifikasi. Di sini, subjektivitas sejarawan mulai berperan, namun harus tetap dalam koridor data. Historiografi adalah tahap akhir: penulisan sejarah itu sendiri.</p>
-          <h3>3. Kegunaan Sejarah</h3>
-          <p>Sejarah memiliki fungsi Edukatif (memberi pelajaran), Inspiratif (memberi semangat), Rekreatif (memberi hiburan), dan Instruktif (membantu pemahaman bidang lain).</p>
+            <h2>🔬 Epistemologi dan Metodologi Sejarah</h2>
+            <p>Sejarah diuji kebenarannya melalui metode ilmiah. Tahapannya meliputi Heuristik (mencari sumber), Verifikasi (kritik eksternal dan internal), Interpretasi (penafsiran), dan Historiografi (penulisan sejarah).</p>
           `,
           3: `
-            <h2>🎓 Historiografi Kritis dan Filsafat Sejarah</h2>
-          <p>Di level Master, kita membedah sejarah sebagai diskursus kekuasaan. Siapa yang menulis sejarah? Mengapa mereka menulisnya? Kita mempelajari <em>Indonesiasentrisme</em> sebagai antitesis dari <em>Neerlandsentrisme</em>.</p>
-          <h3>1. Dekolonisasi Pengetahuan</h3>
-          <p>Mengkaji bagaimana narasi sejarah dibersihkan dari bias kolonial. Kita melihat agensi masyarakat lokal dalam menentukan nasibnya sendiri, bukan sekadar objek penjajahan.</p>
-          <h3>2. Teori-Teori Sejarah Modern</h3>
-          <p>Mempelajari pendekatan multidimensional, menggunakan ilmu sosial lain (sosiologi, antropologi, ekonomi) untuk memperkaya analisis sejarah (<em>Total History</em>).</p>
-          <h3>3. Sejarah dan Masa Depan</h3>
-          <p>Memahami bahwa sejarah adalah dialog yang tidak pernah berakhir antara masa lalu dan masa depan. Pengetahuan sejarah adalah modal intelektual untuk navigasi di era globalisasi.</p>
+            <h2>🎓 Historiografi Kritis</h2>
+            <p>Sejarah sering ditulis oleh pemenang (diskursus kekuasaan). Kita mempelajari transisi dari <em>Neerlandsentrisme</em> (sudut pandang Belanda) ke <em>Indonesiasentrisme</em> (sudut pandang bangsa sendiri) untuk dekolonisasi pengetahuan.</p>
           `
         }
       },
       {
         id: "chap_2",
-        title: "Asal Usul Leluhur",
-        summary: "Menelusuri jejak migrasi manusia ke Nusantara dan keberagaman suku bangsa kita.",
+        title: "Asal Usul Leluhur & Jalur Rempah",
+        summary: "Menelusuri jejak migrasi manusia ke Nusantara dan keberagaman suku bangsa kita serta awal jalur rempah.",
         contentByLevel: {
           0: `
             <h2>👣 Jejak Kaki Pertama di Nusantara</h2>
-          <p>Pernahkah kamu bertanya, dari mana sih nenek moyang kita berasal? Apakah mereka asli dari sini, atau datang dari tempat yang jauh? Ternyata, nenek moyang kita adalah penjelajah yang sangat hebat! Ribuan tahun lalu, mereka mengarungi samudra yang luas dengan perahu bercadik yang sederhana untuk sampai ke pulau-pulau di Indonesia.</p>
-          <h3>1. Gelombang Kedatangan 🌊</h3>
-          <p>Ada beberapa rombongan besar yang datang. Ada yang membawa budaya kapak persegi, ada yang membawa teknik bercocok tanam. Mereka semua bercampur dan menjadi nenek moyang kita yang sekarang punya macam-macam suku dan bahasa.</p>
-          <h3>2. Penjelajah Samudra yang Tangguh 🛶</h3>
-          <p>Nenek moyang kita sangat mengerti arah angin dan bintang. Mereka bisa pergi sejauh Madagaskar di Afrika sampai ke pulau-pulau di Pasifik. Kita adalah bangsa pelaut sejak dulu!</p>
+            <p>Nenek moyang kita adalah pelaut hebat! Mereka datang dari jauh dengan perahu cadik. Mereka mulai mengenal agrikultur dan berdagang rempah-rempah yang sangat mahal harganya di seluruh dunia.</p>
           `,
           1: `
-            <h2>🧬 Teori Migrasi dan Austronesia</h2>
-          <p>Ada beberapa teori besar tentang asal usul bangsa Indonesia, seperti Teori Yunan, Teori Out of Taiwan, dan Teori Out of Africa. Sebagian besar penduduk Nusantara berasal dari rumpun bangsa Austronesia yang bermigrasi sekitar 2000 SM.</p>
-          <h3>1. Jalur Migrasi</h3>
-          <p>Migrasi terjadi melalui jalur barat (lewat daratan Asia) dan jalur timur (lewat kepulauan Filipina). Mereka membawa keahlian agraris dan maritim yang menjadi dasar kebudayaan kita.</p>
-          <h3>2. Proto dan Deutero Melayu</h3>
-          <p>Proto Melayu (Melayu Tua) datang lebih awal dengan budaya batu, disusul Deutero Melayu (Melayu Muda) yang membawa keahlian logam (budaya Dongson).</p>
+            <h2>🧬 Teori Migrasi Austronesia</h2>
+            <p>Nenek moyang kita berasal dari rumpun bangsa Austronesia. Ada Teori Out of Taiwan, Teori Yunan, dan Out of Africa. Kedatangan terbagi dalam gelombang Proto Melayu (batu tua) dan Deutero Melayu (logam).</p>
           `,
           2: `
             <h2>🔬 Analisis Genetika dan Lingguistik</h2>
-          <p>Melalui tes DNA modern, kita tahu bahwa bangsa Indonesia adalah hasil percampuran genetik yang sangat kaya. Secara linguistik, bahasa-bahasa di Nusantara memiliki akar yang sama dalam rumpun bahasa Austronesia.</p>
-          <h3>1. Bukti Arkeologi</h3>
-          <p>Penemuan beliung persegi dan kapak lonjong menjadi bukti fisik persebaran kebudayaan dari Asia daratan menuju kepulauan Nusantara.</p>
-          <h3>2. Adaptasi Ekosistem</h3>
-          <p>Bagaimana manusia awal beradaptasi dengan iklim tropis dan membentuk beragam kebudayaan lokal (Local Genius) sesuai dengan kondisi alam pulau-pulau di Indonesia.</p>
+            <p>DNA kita adalah percampuran berbagai genetik. Secara linguistik, bahasa kita berakar dari rumpun bahasa Austronesia. Kemampuan navigasi bintang membuat mereka menguasai maritim purba.</p>
           `,
           3: `
-            <h2>🎓 Konstruksi Identitas Nasional melalui Etnogenesis</h2>
-          <p>Mempelajari proses pembentukan suku-suku di Indonesia (Etnogenesis) sebagai sebuah kesatuan yang dinamis. Kita memahami bahwa "Kemurnian Ras" adalah mitos; kita semua adalah saudara serumpun yang disatukan oleh sejarah.</p>
-          <h3>1. Wawasan Nusantara Prasejarah</h3>
-          <p>Memahami bahwa jaringan komunikasi antar pulau sudah terbentuk sejak ribuan tahun lalu, meletakkan dasar bagi kesatuan nasional Indonesia di masa depan.</p>
+            <h2>🎓 Etnogenesis dan Wawasan Nusantara Prasejarah</h2>
+            <p>Proses pembentukan suku-suku (Etnogenesis) membuktikan bahwa kemurnian ras adalah mitos. Jalur rempah prasejarah meletakkan dasar kesatuan Wawasan Nusantara dan diplomasi ekonomi kuno.</p>
           `
         }
       },
       {
         id: "chap_3",
-        title: "Masa Praaksara",
-        summary: "Kehidupan manusia sebelum mengenal tulisan, dari berburu hingga teknik logam yang canggih.",
-        contentByLevel: {
-          0: `
-            <h2>🍖 Hidup di Zaman Batu dan Logam</h2>
-          <p>Bayangkan hidup tanpa HP, tanpa listrik, bahkan tanpa baju seperti sekarang. Manusia purba hidup sangat dekat dengan alam. Mereka tinggal di gua, berburu hewan, dan makan buah-buahan hutan. Tapi jangan salah, mereka sangat pintar bertahan hidup!</p>
-          <h3>1. Masa Berburu dan Meramu 🏹</h3>
-          <p>Awalnya manusia hidup berpindah-pindah (nomaden). Mereka mengikuti arah hewan buruan dan sumber air. Alat mereka masih sangat sederhana, terbuat dari batu kasar.</p>
-          <h3>2. Mulai Menetap dan Bercocok Tanam 🌾</h3>
-          <p>Lama-lama mereka sadar bahwa biji yang jatuh ke tanah bisa tumbuh. Mereka pun mulai menanam padi, memelihara hewan, dan tinggal di desa-desa kecil. Inilah perubahan besar dalam sejarah manusia.</p>
-          `,
-          1: `
-            <h2>🗿 Periodisasi Zaman Praaksara</h2>
-          <p>Masa Praaksara dibagi berdasarkan alat yang digunakan: Paleolitikum (Batu Tua), Mesolitikum (Batu Tengah), Neolitikum (Batu Baru), dan Megalitikum (Batu Besar), serta Zaman Logam.</p>
-          <h3>1. Revolusi Neolitik</h3>
-          <p>Perubahan dari <em>Food Gathering</em> menjadi <em>Food Producing</em>. Ini adalah titik balik di mana manusia mulai membentuk peradaban sosial yang menetap.</p>
-          <h3>2. Kebudayaan Megalitikum</h3>
-          <p>Pemujaan roh leluhur melalui bangunan batu besar seperti Punden Berundak, Menhir, dan Sarkofagus. Ini adalah akar kepercayaan asli Indonesia.</p>
-          `,
-          2: `
-            <h2>🔬 Transformasi Sosio-Teknologi Praaksara</h2>
-          <p>Analisis mendalam mengenai pembagian kerja dan stratifikasi sosial yang mulai muncul pada zaman Perundagian (Logam). Munculnya golongan Undagi (ahli pertukangan) menunjukkan kemajuan teknologi yang signifikan.</p>
-          <h3>1. Teknik Cetak Logam</h3>
-          <p>Mempelajari teknik <em>Bivalve</em> dan <em>A Cire Perdue</em> dalam pembuatan artefak logam seperti Nekara dan Kapak Corong.</p>
-          <h3>2. Sistem Kepercayaan Purba</h3>
-          <p>Analisis mengenai konsep Animisme dan Dinamisme sebagai bentuk usaha manusia awal memahami kekuatan alam semesta.</p>
-          `,
-          3: `
-            <h2>🎓 Filsafat Hidup Manusia Praaksara</h2>
-          <p>Mengkaji bagaimana pola pikir manusia praaksara dalam menjaga keseimbangan alam masih relevan hingga kini. Kita melihat mereka sebagai "Insinyur Alam" yang sangat handal.</p>
-          <h3>1. Kontinuitas Budaya</h3>
-          <p>Menganalisis bagaimana tradisi megalitik masih bertahan di beberapa daerah di Indonesia (Living Megalithic), membuktikan kekuatan akar budaya asli kita.</p>
-          `
-        }
-      },
-      {
-        id: "chap_4",
         title: "Kerajaan Hindu-Buddha",
         summary: "Masa keemasan nusantara, dari candi Borobudur yang megah hingga kejayaan Majapahit.",
         contentByLevel: {
           0: `
             <h2>🏰 Negeri Para Raja dan Candi Megah</h2>
-          <p>Pernahkah kamu membayangkan Indonesia ribuan tahun lalu? Bayangkan sebuah negeri yang penuh dengan istana emas, candi-candi raksasa yang menjulang ke langit, dan pelabuhan yang sangat ramai dikunjungi pedagang dari China dan India. Itulah masa <strong>Hindu-Buddha</strong> di Indonesia!</p>
-          <h3>1. Candi Borobudur & Prambanan ☸️</h3>
-          <p>Nenek moyang kita membangun candi Buddha terbesar di dunia (Borobudur) dan candi Hindu yang sangat indah (Prambanan). Semuanya dibuat dari susunan batu yang sangat rapi tanpa semen!</p>
-          <h3>2. Kejayaan Majapahit 🚩</h3>
-          <p>Kerajaan Majapahit dengan Patih Gajah Mada berhasil menyatukan wilayah Nusantara. Slogan kita "Bhinneka Tunggal Ika" lahir dari zaman ini lho!</p>
+            <p>Nusantara pernah memiliki kerajaan-kerajaan luar biasa seperti Sriwijaya dan Majapahit. Mereka membangun Candi Borobudur dan Prambanan, serta menyatukan nusantara melalui Sumpah Palapa Patih Gajah Mada.</p>
           `,
           1: `
             <h2>🕉️ Akulturasi Budaya India di Nusantara</h2>
-          <p>Masuknya pengaruh India melalui jalur perdagangan membawa perubahan besar dalam sistem pemerintahan, dari suku menjadi kerajaan. Proses ini disebut Akulturasi karena budaya lokal tetap kuat.</p>
-          <h3>1. Kerajaan Maritim Sriwijaya</h3>
-          <p>Sriwijaya menjadi pusat perdagangan dan pendidikan agama Buddha terbesar di Asia Tenggara, menguasai Selat Malaka yang strategis.</p>
-          <h3>2. Konsep Dewaraja</h3>
-          <p>Raja dianggap sebagai titisan dewa, yang memberikan legitimasi politik untuk memimpin wilayah yang luas.</p>
+            <p>Masuknya Hindu-Buddha membawa konsep kerajaan (Dewaraja) menggantikan sistem kepala suku. Terjadi akulturasi budaya, terlihat dari bentuk candi yang merupakan perpaduan punden berundak dan arsitektur India.</p>
           `,
           2: `
             <h2>🔬 Geopolitik dan Ekonomi Klasik</h2>
-          <p>Analisis mengenai hubungan dagang antara Nusantara, Tiongkok, and India. Nusantara berfungsi sebagai <em>Entrepôt</em> global yang sangat penting.</p>
-          <h3>1. Birokrasi Majapahit</h3>
-          <p>Mempelajari sistem administrasi Majapahit yang tercatat dalam kitab Negarakertagama, menunjukkan tata kelola negara yang sangat maju pada masanya.</p>
-          <h3>2. Sinkretisme Agama</h3>
-          <p>Bagaimana Hindu dan Buddha bisa hidup berdampingan secara damai, bahkan menghasilkan aliran baru seperti Syiwa-Buddha.</p>
+            <p>Sriwijaya mengontrol Selat Malaka sebagai jalur perdagangan global. Majapahit mengembangkan sistem birokrasi maju (Nagarakretagama) dan konsep mandala untuk mengatur negara taklukan dan sahabat.</p>
           `,
           3: `
             <h2>🎓 Politik Memori dan Identitas Nasional</h2>
-          <p>Mengkaji bagaimana sejarah Majapahit dan Sriwijaya digunakan oleh para pendiri bangsa untuk membangun semangat nasionalisme Indonesia modern.</p>
-          <h3>1. Warisan Budaya Abadi</h3>
-          <p>Analisis mengenai tata ruang, hukum, and kesenian masa klasik yang masih menjadi DNA budaya Indonesia hingga hari ini.</p>
+            <p>Konsep Bhinneka Tunggal Ika dari Mpu Tantular dan kebesaran Majapahit digunakan oleh para pendiri bangsa modern (Soekarno, Yamin) untuk membangun imajinasi geopolitik negara kesatuan Indonesia.</p>
           `
         }
       },
       {
-        id: "chap_5",
+        id: "chap_4",
         title: "Kerajaan Islam",
-        summary: "Masuknya cahaya Islam di nusantara, dari jalur perdagangan hingga berdirinya kesultanan-kesultanan besar.",
+        summary: "Masuknya cahaya Islam di nusantara, dari jalur perdagangan hingga berdirinya kesultanan besar.",
         contentByLevel: {
           0: `
             <h2>🌙 Cahaya Islam di Nusantara</h2>
-          <p>Setelah masa Hindu-Buddha, datanglah ajaran Islam yang dibawa oleh pedagang Arab, Persia, dan Gujarat. Islam menyebar dengan damai melalui perdagangan, perkawinan, and seni yang indah.</p>
-          <h3>1. Wali Songo yang Cerdas 🎨</h3>
-          <p>Di Jawa, ada sembilan tokoh hebat yang menyebarkan Islam lewat budaya, seperti Sunan Kalijaga yang menggunakan Wayang Kulit. Rakyat pun senang belajar Islam.</p>
-          <h3>2. Kesultanan Besar 🕋</h3>
-          <p>Berdiri kesultanan hebat seperti Samudera Pasai, Demak, Banten, Gowa-Tallo, sampai Ternate-Tidore. Mereka sangat peduli pada rakyat and perdagangan.</p>
+            <p>Islam masuk dengan damai melalui pedagang dari Gujarat, Arab, dan Persia. Wali Songo menyebarkan agama menggunakan wayang dan tembang. Berdirilah kesultanan seperti Demak, Banten, dan Ternate.</p>
           `,
           1: `
             <h2>🕌 Egalitarianisme dan Transformasi Sosial</h2>
-          <p>Islam membawa konsep bahwa semua manusia setara di mata Tuhan, yang memicu "demokratisasi" budaya di Nusantara. Penghapusan kasta membuat Islam mudah diterima masyarakat luas.</p>
-          <h3>1. Saluran Islamisasi</h3>
-          <p>Penyebaran melalui jalur Perdagangan, Perkawinan, Pendidikan (Pesantren), Dakwah, and Kesenian.</p>
-          <h3>2. Akulturasi Arsitektur</h3>
-          <p>Masjid dengan atap tumpang and menara mirip candi membuktikan harmoni antara ajaran Islam dengan budaya lokal.</p>
+            <p>Konsep kesetaraan (tanpa kasta) dalam Islam mempercepat penerimaannya. Jalur penyebaran meliputi perdagangan, perkawinan, pendidikan (pesantren), dan kesenian lokal.</p>
           `,
           2: `
-            <h2>🔬 Jaringan Intelektual dan Ekonomi Syariah awal</h2>
-          <p>Analisis mengenai hubungan Kesultanan di Nusantara dengan pusat Islam dunia seperti Mekkah and Istanbul. Munculnya jaringan ulama global yang sangat berpengaruh.</p>
-          <h3>1. Maritimisme Islam</h3>
-          <p>Kesultanan Makassar and Aceh menjadi pusat perdagangan internasional yang menyaingi monopoli bangsa Eropa.</p>
-          <h3>2. Sastra Suluk dan Tasawuf</h3>
-          <p>Mempelajari dimensi spiritual Islam yang diungkapkan melalui karya sastra Melayu-Arab yang sangat kaya.</p>
+            <h2>🔬 Jaringan Intelektual dan Maritimisme</h2>
+            <p>Kesultanan Demak, Aceh, dan Gowa-Tallo menjadi kekuatan maritim baru penguasa rempah. Muncul jaringan intelektual ulama Nusantara yang terhubung dengan pusat keilmuan di Timur Tengah.</p>
           `,
           3: `
-            <h2>🎓 Islam sebagai Pilar Nasionalisme</h2>
-          <p>Mengkaji bagaimana identitas Islam menjadi perekat persatuan bangsa dalam menghadapi kolonialisme Barat yang mulai datang.</p>
-          <h3>1. Historiografi Islam Nusantara</h3>
-          <p>Menekankan peran ulama and santri dalam perjuangan fisik maupun intelektual mempertahankan kedaulatan tanah air.</p>
+            <h2>🎓 Islam sebagai Pilar Perlawanan Nasional</h2>
+            <p>Islam bertransformasi dari sekadar agama menjadi identitas dan ideologi perlawanan (Jihad) melawan ekspansi kolonialisme Barat (Portugis dan VOC).</p>
+          `
+        }
+      }
+    ]
+  },
+  {
+    id: "fase_f_awal",
+    title: "Fase F Awal: Kolonialisme & Pergerakan Nasional",
+    description: "Menganalisis masa penjajahan bangsa Eropa, bangkitnya kesadaran nasional, hingga kependudukan Jepang.",
+    chapters: [
+      {
+        id: "chap_5",
+        title: "Kolonialisme & Perlawanan",
+        summary: "Eksploitasi bangsa Barat (VOC hingga Hindia Belanda) dan perlawanan rakyat daerah.",
+        contentByLevel: {
+          0: `
+            <h2>🛡️ Melawan Penjajah demi Harga Diri!</h2>
+            <p>Bangsa Eropa datang mencari rempah-rempah. VOC memonopoli dagang dan Belanda menerapkan Tanam Paksa. Pahlawan kita seperti Diponegoro dan Cut Nyak Dhien berjuang mengangkat senjata melawan mereka!</p>
+          `,
+          1: `
+            <h2>⛓️ Mekanisme Eksploitasi Kolonial</h2>
+            <p>Kebijakan ekstraktif seperti Cultuurstelsel dan Kerja Rodi menghancurkan ekonomi lokal. Belanda menggunakan politik adu domba (Devide et Impera) untuk memecah belah kerajaan Nusantara.</p>
+          `,
+          2: `
+            <h2>🔬 Ekonomi Politik Imperialisme Modern</h2>
+            <p>UU Agraria 1870 membuka pintu investasi swasta asing, mengubah Nusantara menjadi ekonomi perkebunan (Export-Oriented). Hal ini memicu protes sosial dan pemberontakan petani.</p>
+          `,
+          3: `
+            <h2>🎓 Warisan Post-Kolonial dan Dekolonisasi</h2>
+            <p>Mengkaji struktur hukum, birokrasi, dan tata kota peninggalan Belanda, serta pentingnya dekolonisasi mental untuk lepas dari inferioritas kolonial yang masih tersisa.</p>
+          `
+        }
+      },
+      {
+        id: "chap_6",
+        title: "Pergerakan Nasional",
+        summary: "Tumbuhnya kesadaran kebangsaan dan lahirnya organisasi-organisasi pergerakan.",
+        contentByLevel: {
+          0: `
+            <h2>✊ Pemuda Bersatu untuk Merdeka!</h2>
+            <p>Perjuangan berubah dari angkat senjata menjadi menggunakan otak dan pena! Pemuda mendirikan Budi Utomo, Sarekat Islam, dan bersumpah dalam Sumpah Pemuda 1928 untuk bersatu menjadi bangsa Indonesia.</p>
+          `,
+          1: `
+            <h2>📚 Budi Utomo hingga Sumpah Pemuda</h2>
+            <p>Dampak Politik Etis (Edukasi) melahirkan kaum intelektual. Lahir organisasi kedaerahan hingga nasional. Sumpah Pemuda menyatukan bahasa, bangsa, dan tanah air Indonesia.</p>
+          `,
+          2: `
+            <h2>🔬 Ideologi Pergerakan Nasional</h2>
+            <p>Tiga aliran besar mewarnai pergerakan: Nasionalisme (PNI), Islamisme (SI), dan Komunisme (PKI). Mereka berjuang di Volksraad (parlemen) maupun secara non-kooperatif melawan Hindia Belanda.</p>
+          `,
+          3: `
+            <h2>🎓 Konstruksi Identitas 'Indonesia'</h2>
+            <p>Konsep 'Indonesia' awalnya hanyalah istilah geografis yang kemudian direkayasa menjadi identitas politik kebangsaan (Imagined Communities) untuk melawan konstruksi kolonial Hindia Belanda.</p>
+          `
+        }
+      },
+      {
+        id: "chap_7",
+        title: "Pendudukan Jepang & Proklamasi",
+        summary: "Masa singkat di bawah militerisme Jepang yang berujung pada momentum kemerdekaan 1945.",
+        contentByLevel: {
+          0: `
+            <h2>🇯🇵 Datangnya Saudara Tua dan 🇮🇩 Kemerdekaan</h2>
+            <p>Jepang datang menjajah dengan kejam lewat Romusha. Tapi dari situ pemuda kita belajar militer. Saat Jepang kalah, Soekarno-Hatta memproklamasikan Kemerdekaan Indonesia pada 17 Agustus 1945!</p>
+          `,
+          1: `
+            <h2>⚔️ Militerisasi Masyarakat dan Janji Kemerdekaan</h2>
+            <p>Jepang membentuk organisasi militer (PETA, Heiho) untuk perangnya. Golongan muda (Sjahrir, Chaerul Saleh) memaksa Soekarno lewat peristiwa Rengasdengklok agar segera memproklamasikan kemerdekaan secara mandiri.</p>
+          `,
+          2: `
+            <h2>🔬 Dinamika Vacuum of Power</h2>
+            <p>Kekosongan kekuasaan pasca bom atom dimanfaatkan Indonesia. PPKI mengesahkan UUD 1945, memilih presiden, dan membentuk kelengkapan negara. Kemerdekaan adalah hasil perjuangan, bukan hadiah Jepang.</p>
+          `,
+          3: `
+            <h2>🎓 Proklamasi sebagai Kontrak Sosial Baru</h2>
+            <p>Proklamasi menghapus tata hukum kolonial (konstitusi lama) dan melahirkan tata hukum nasional baru. Ini merupakan revolusi hukum dan konsensus tertinggi seluruh elemen bangsa.</p>
           `
         }
       }
@@ -209,82 +176,75 @@ export const historyPhases = [
   },
   {
     id: "fase_f",
-    title: "Fase F: Kolonialisme hingga Proklamasi Kemerdekaan",
-    description: "Menganalisis masa penjajahan bangsa Eropa, perlawanan rakyat, hingga detik-detik proklamasi 1945.",
+    title: "Fase F: Revolusi, Demokrasi, hingga Reformasi",
+    description: "Mempelajari dinamika mempertahankan kemerdekaan, era Demokrasi terpimpin, Orde Baru, hingga era Reformasi.",
     chapters: [
       {
-        id: "chap_6",
-        title: "Kolonialisme & Perlawanan",
-        summary: "Eksploitasi bangsa Eropa di Nusantara dan bangkitnya perlawanan rakyat di berbagai daerah.",
+        id: "chap_8",
+        title: "Mempertahankan Kemerdekaan",
+        summary: "Perjuangan fisik dan diplomasi dalam mempertahankan kemerdekaan dari Agresi Militer Belanda.",
         contentByLevel: {
           0: `
-            <h2>🛡️ Melawan Penjajah demi Harga Diri!</h2>
-          <p>Bangsa Eropa datang karena ingin menguasai rempah-rempah kita yang harganya lebih mahal dari emas. Mereka pun mulai menjajah dan memaksa rakyat bekerja tanpa dibayar.</p>
-          <h3>1. VOC yang Serakah 🚢</h3>
-          <p>Belanda membentuk perusahaan VOC yang sangat kuat dan kejam. Mereka memonopoli dagang dan mengadu domba kerajaan-kerajaan kita.</p>
-          <h3>2. Pahlawan Kita yang Gagah ⚔️</h3>
-          <p>Ada Pangeran Diponegoro, Sultan Hasanuddin, Pattimura, sampai Cut Nyak Dhien yang berani berperang demi mengusir penjajah. Mereka adalah inspirasi kita!</p>
+            <h2>🔥 Merdeka atau Mati!</h2>
+            <p>Belanda ingin menjajah lagi. Jenderal Sudirman memimpin perang gerilya di hutan. Para diplomat kita berjuang di PBB. Berkat keberanian rakyat, Belanda akhirnya menyerah pada 1949.</p>
           `,
           1: `
-            <h2>⛓️ Mekanisme Eksploitasi Kolonial</h2>
-          <p>Kolonialisme menerapkan sistem yang menghisap kekayaan alam Indonesia, seperti Sistem Tanam Paksa (Cultuurstelsel) dan Kerja Rodi yang sangat menyengsara rakyat.</p>
-          <h3>1. Politik Devide et Impera</h3>
-          <p>Strategi adu domba Belanda untuk melemahkan persatuan kerajaan-kerajaan lokal agar mudah dikuasai.</p>
-          <h3>2. Transformasi Perlawanan</h3>
-          <p>Dari perlawanan fisik yang bersifat kedaerahan, mulai bergeser ke perlawanan yang lebih terorganisir di awal abad ke-20.</p>
+            <h2>🤝 Strategi Senjata dan Pena</h2>
+            <p>Perjuangan dilakukan dua jalur: Perang Fisik (Agresi Militer I dan II) dan Perundingan (Linggarjati, Renville, Roem-Royen, KMB). KMB 1949 memberikan pengakuan kedaulatan Indonesia secara penuh.</p>
           `,
           2: `
-            <h2>🔬 Ekonomi Politik Imperialisme Modern</h2>
-          <p>Analisis mengenai dampak UU Agraria 1870 dan masuknya modal swasta asing yang mengubah struktur ekonomi Nusantara menjadi Export-Oriented.</p>
-          <h3>1. Sosiologi Perlawanan Rakyat</h3>
-          <p>Mempelajari bagaimana tekanan ekonomi memicu pemberontakan petani dan gerakan keagamaan sebagai bentuk protes sosial.</p>
-          <h3>2. Dampak Politik Etis</h3>
-          <p>Bagaimana kebijakan pendidikan Belanda secara ironis melahirkan golongan terpelajar yang nantinya justru menjadi musuh utama kolonialisme.</p>
+            <h2>🔬 Dinamika Internal Revolusi</h2>
+            <p>Di tengah ancaman Belanda, Indonesia menghadapi gejolak internal seperti pemberontakan PKI Madiun 1948 dan DI/TII. Ini ujian berat bagi kesatuan NKRI yang baru seumur jagung.</p>
           `,
           3: `
-            <h2>🎓 Dekolonisasi dan Kedaulatan Mental</h2>
-          <p>Mengkaji sejarah kolonialisme dari perspektif Indonesiasentris. Kita membedah bagaimana bangsa kita berhasil menjaga mentalitas merdeka di tengah penindasan.</p>
-          <h3>1. Warisan Post-Kolonial</h3>
-          <p>Menganalisis struktur birokrasi dan hukum peninggalan Belanda yang masih kita gunakan, serta usaha untuk melakukan dekolonisasi total.</p>
+            <h2>🎓 Historiografi Revolusi Indonesia</h2>
+            <p>Revolusi nasional bukan sekadar perang kemerdekaan, tetapi juga revolusi sosial (runtuhnya aristokrasi lokal) dan panggung diplomasi internasional di awal Perang Dingin.</p>
           `
         }
       },
       {
-        id: "chap_7",
-        title: "Proklamasi & Kemerdekaan",
-        summary: "Detik-detik bersejarah proklamasi kemerdekaan Indonesia dan perjuangan mempertahankannya.",
+        id: "chap_9",
+        title: "Demokrasi Liberal & Terpimpin",
+        summary: "Dinamika politik kabinet parlementer (Liberal) hingga pemusatan kekuasaan di era Terpimpin.",
         contentByLevel: {
           0: `
-            <h2>🇮🇩 Merdeka! Indonesia Bebas!</h2>
-          <p>17 Agustus 1945 adalah hari paling bahagia bagi bangsa Indonesia. Bung Karno membacakan Proklamasi yang menyatakan kita adalah bangsa yang merdeka dan berdaulat!</p>
-          <h3>1. Semangat Pemuda Rengasdengklok 🚗</h3>
-          <p>Para pemuda membawa Bung Karno ke Rengasdengklok agar segera memproklamasikan kemerdekaan tanpa bantuan Jepang. Ini bukti kemerdekaan adalah hasil keringat kita sendiri!</p>
-          <h3>2. Merah Putih Berkibar 🧵</h3>
-          <p>Ibu Fatmawati menjahit bendera kita dengan penuh doa. Rakyat bersorak "Merdeka!" di seluruh pelosok negeri. Kita bebas!</p>
+            <h2>⚖️ Mencari Bentuk Negara yang Pas</h2>
+            <p>Dulu kita mencoba sistem banyak partai tapi pemerintahan sering ganti. Soekarno lalu mengambil alih (Demokrasi Terpimpin) untuk menstabilkan negara, namun diakhiri oleh peristiwa G30S 1965.</p>
           `,
           1: `
-            <h2>🇮🇩 Proklamasi 1945: Momentum Strategis</h2>
-          <p>Proklamasi adalah pemanfaatan cerdas terhadap kekosongan kekuasaan (Vacuum of Power) pasca menyerahnya Jepang kepada Sekutu.</p>
-          <h3>1. Legitimasi Negara Baru</h3>
-          <p>Sidang PPKI 18 Agustus 1945 menetapkan UUD 1945 serta memilih Presiden dan Wakil Presiden sebagai syarat sah berdirinya sebuah negara.</p>
-          <h3>2. Penyebaran Berita Merdeka</h3>
-          <p>Perjuangan menyiarkan kabar proklamasi lewat radio dan pamflet agar seluruh dunia tahu bahwa Indonesia sudah lahir.</p>
+            <h2>🏛️ Jatuh Bangun Kabinet Demokrasi Parlementer</h2>
+            <p>Ketidakstabilan politik (7 kabinet dalam 9 tahun) membuat pembangunan terhambat. Pemilu 1955 sukses, namun Konstituante gagal menyusun UUD, memicu keluarnya Dekrit Presiden 1959.</p>
           `,
           2: `
-            <h2>🔬 Revolusi Fisik dan Meja Diplomasi</h2>
-          <p>Perjuangan mempertahankan kemerdekaan dilakukan lewat dua jalur: Perang Fisik (Gerilya) dan Diplomasi di forum internasional (PBB).</p>
-          <h3>1. Agresi Militer Belanda</h3>
-          <p>Belanda tidak mau mengakui kemerdekaan kita dan menyerang dua kali, namun rakyat bersatu dengan semangat "Merdeka atau Mati!".</p>
-          <h3>2. Pengakuan Kedaulatan 1949</h3>
-          <p>Konferensi Meja Bundar (KMB) akhirnya memaksa Belanda mengakui kedaulatan Indonesia secara penuh.</p>
+            <h2>🔬 Politik Mercusuar dan Konfrontasi</h2>
+            <p>Era Terpimpin diwarnai politik luar negeri agresif (Trikora melawan Belanda, Dwikora melawan Malaysia) dan proyek mercusuar (Monas) untuk menunjukkan kebesaran Indonesia di mata dunia (NEFO).</p>
           `,
           3: `
-            <h2>🎓 Historiografi Revolusi: Kontrak Sosial Bangsa</h2>
-          <p>Mengkaji Proklamasi sebagai dasar kesepakatan bersama seluruh elemen bangsa (Kontrak Sosial) untuk hidup bersatu dalam NKRI.</p>
-          <h3>1. Dialektika Diplomasi dan Perlawanan</h3>
-          <p>Analisis Master mengenai bagaimana sinergi antara kekuatan senjata di lapangan dan kekuatan kata di meja perundingan memenangkan revolusi kita.</p>
-          <h3>2. Pancasila sebagai Ideologi Pemersatu</h3>
-          <p>Memahami bagaimana nilai-nilai Pancasila dirumuskan sebagai jalan tengah untuk mengakomodasi keberagaman bangsa Indonesia yang luar biasa.</p>
+            <h2>🎓 Hegemoni Kekuasaan dan Tragedi 1965</h2>
+            <p>Pertarungan segitiga kekuasaan (Soekarno, Angkatan Darat, dan PKI) berujung pada krisis politik, penculikan jenderal (G30S), dan transisi kekuasaan ke tangan Jenderal Soeharto (Supersemar).</p>
+          `
+        }
+      },
+      {
+        id: "chap_10",
+        title: "Orde Baru & Era Reformasi",
+        summary: "Pembangunan ekonomi di bawah Orde Baru hingga krisis moneter dan lahirnya Reformasi 1998.",
+        contentByLevel: {
+          0: `
+            <h2>🏗️ Era Pembangunan dan Lahirnya Reformasi</h2>
+            <p>Presiden Soeharto berkuasa selama 32 tahun, membangun jalan dan sekolah. Namun karena krisis ekonomi dan korupsi, mahasiswa berdemo pada 1998 untuk menuntut keadilan (Reformasi).</p>
+          `,
+          1: `
+            <h2>⚙️ Stabilitas Politik dan Pertumbuhan Ekonomi</h2>
+            <p>Orde Baru menstabilkan negara lewat penyederhanaan partai, Dwifungsi ABRI, dan rencana pembangunan lima tahun (Repelita). Namun, kebebasan berpendapat sangat dibatasi.</p>
+          `,
+          2: `
+            <h2>📉 Krisis Moneter dan Jatuhnya Rezim</h2>
+            <p>Krisis finansial Asia 1997 memicu krisis multidimensi. Tuntutan reformasi dari mahasiswa dan tokoh masyarakat berhasil memaksa Soeharto lengser pada 21 Mei 1998.</p>
+          `,
+          3: `
+            <h2>🎓 Transisi Demokrasi dan Tantangan Global</h2>
+            <p>Era Reformasi membawa kebebasan pers, pemilu langsung, amandemen UUD 1945, dan desentralisasi. Tantangannya adalah konsolidasi demokrasi dan pemberantasan KKN di era globalisasi.</p>
           `
         }
       }
