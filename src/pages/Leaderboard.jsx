@@ -64,21 +64,21 @@ export default function Leaderboard() {
   const overallProgress = Math.round((completedChapters / totalChapters) * 100);
 
   return (
-    <main className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500 relative">
+    <main className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500 relative">
       {/* Background Decor */}
       <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-secondary rounded-full mix-blend-multiply filter blur-[150px] opacity-10 pointer-events-none"></div>
 
-      <div className="flex flex-col lg:flex-row gap-8 items-start relative z-10">
+      <div className="flex flex-col lg:flex-row gap-6 items-start relative z-10">
         
         {/* Kolom Kiri: Tabel Leaderboard & Podium */}
         <div className="lg:w-2/3 glass-panel overflow-hidden w-full flex flex-col">
-          <div className="p-8 pb-6 border-b border-glass-border flex items-center justify-between">
+          <div className="px-5 sm:px-8 py-5 sm:py-6 border-b border-glass-border flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-black mb-2 flex items-center gap-3">
-                <Trophy className="text-yellow-500 w-8 h-8" />
+              <h2 className="text-xl sm:text-3xl font-black mb-1 flex items-center gap-2 sm:gap-3">
+                <Trophy className="text-yellow-500 w-6 h-6 sm:w-8 sm:h-8" />
                 Global Rankings
               </h2>
-              <p className="opacity-70 font-medium">Bandingkan pencapaianmu dengan pelajar sejarah lainnya.</p>
+              <p className="opacity-70 font-medium text-sm">Bandingkan pencapaianmu dengan pelajar sejarah lainnya.</p>
             </div>
           </div>
           
@@ -89,9 +89,9 @@ export default function Leaderboard() {
           ) : leaderboardData.length === 0 ? (
             <div className="p-20 text-center opacity-60">Belum ada data di Leaderboard. Ayo mulai evaluasi!</div>
           ) : (
-            <div className="p-8 pb-0">
+            <div className="px-4 sm:px-8 pb-0">
               {/* TOP 3 PODIUM */}
-              <div className="flex justify-center items-end gap-2 sm:gap-4 mb-12 h-56 sm:h-64 mt-8">
+              <div className="flex justify-center items-end gap-2 sm:gap-4 mb-8 h-48 sm:h-60 mt-6">
                 {/* Rank 2 (Silver) */}
                 {top3[1] && (
                   <div className="flex flex-col items-center justify-end h-[80%] w-1/3 animate-in slide-in-from-bottom-8 duration-700 delay-100">
@@ -145,46 +145,54 @@ export default function Leaderboard() {
               
               {/* REMAINING LIST */}
               {remainingList.length > 0 && (
-                <div className="w-full overflow-x-auto pb-4 -mx-4 px-4 sm:-mx-8 sm:px-8">
-                  <table className="w-full min-w-[600px] text-left border-collapse">
+                <div className="w-full overflow-x-auto pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+                  <table className="w-full min-w-[420px] text-left border-collapse">
                     <thead>
                       <tr className="text-xs font-bold opacity-60 uppercase tracking-wider bg-surface/30 border-b border-t border-glass-border">
-                        <th className="px-8 py-4 w-20">Rank</th>
-                        <th className="px-8 py-4">Pelajar</th>
-                        <th className="px-8 py-4 text-center">Total Poin</th>
-                        <th className="px-8 py-4 text-right">Streak Terbaik</th>
+                        <th className="px-3 sm:px-6 py-3 w-12 sm:w-16">Rank</th>
+                        <th className="px-3 sm:px-6 py-3">Pelajar</th>
+                        <th className="px-3 sm:px-6 py-3 text-center">Poin</th>
+                        <th className="px-3 sm:px-6 py-3 text-right"><span className="hidden sm:inline">Streak </span>🔥</th>
                       </tr>
                     </thead>
                     <tbody>
                       {remainingList.map((student) => (
                         <tr 
                           key={student.name + student.rank} 
-                          className={`border-b border-glass-border/50 hover:bg-glass transition-colors ${student.isUser ? 'bg-primary/10 border-l-4 border-l-primary' : 'border-l-4 border-l-transparent'}`}
+                          className={`border-b border-glass-border/50 hover:bg-glass transition-colors ${
+                            student.isUser
+                              ? 'bg-primary/10 border-l-4 border-l-primary'
+                              : 'border-l-4 border-l-transparent'
+                          }`}
                         >
-                          <td className="px-8 py-5">
-                            <span className="font-bold text-lg opacity-60">#{student.rank}</span>
+                          <td className="px-3 sm:px-6 py-3">
+                            <span className="font-bold text-sm sm:text-base opacity-60">#{student.rank}</span>
                           </td>
-                          <td className="px-8 py-5">
-                            <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xl shrink-0 bg-gradient-to-br ${AVATAR_COLORS[student.avatar]||'from-primary to-secondary'} ${student.isUser ? 'ring-2 ring-primary shadow-md' : ''}`}>
-                              {AVATAR_EMOJI[student.avatar]||'👤'}
-                            </div>
-                              <span className={`font-bold ${student.isUser ? 'text-primary' : ''}`}>
-                                {student.name}
-                                {student.isUser && <span className="ml-2 text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">Kamu</span>}
-                              </span>
+                          <td className="px-3 sm:px-6 py-3">
+                            <div className="flex items-center gap-2 sm:gap-3">
+                              <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-xl shrink-0 bg-gradient-to-br ${AVATAR_COLORS[student.avatar]||'from-primary to-secondary'} ${student.isUser ? 'ring-2 ring-primary shadow-md' : ''}`}>
+                                {AVATAR_EMOJI[student.avatar]||'👤'}
+                              </div>
+                              <div className="min-w-0">
+                                <span className={`font-bold text-sm block truncate max-w-[100px] sm:max-w-none ${student.isUser ? 'text-primary' : ''}`}>
+                                  {student.name}
+                                </span>
+                                {student.isUser && (
+                                  <span className="text-xs bg-primary/20 text-primary px-1.5 py-0.5 rounded-full">Kamu</span>
+                                )}
+                              </div>
                             </div>
                           </td>
-                          <td className="px-8 py-5 text-center">
-                            <span className="font-black text-lg bg-surface/50 px-3 py-1 rounded-full border border-glass-border">
+                          <td className="px-3 sm:px-6 py-3 text-center">
+                            <span className="font-black text-sm sm:text-base bg-surface/50 px-2 sm:px-3 py-1 rounded-full border border-glass-border">
                               {student.points.toLocaleString()}
                             </span>
                           </td>
-                          <td className="px-8 py-5 text-right flex items-center justify-end gap-2">
-                            <span className="font-bold text-lg opacity-80">
-                              {student.bestStreak}
-                            </span>
-                            <Flame className="text-orange-500 w-5 h-5" />
+                          <td className="px-3 sm:px-6 py-3 text-right">
+                            <div className="flex items-center justify-end gap-1">
+                              <span className="font-bold text-sm sm:text-base opacity-80">{student.bestStreak}</span>
+                              <Flame className="text-orange-500 w-4 h-4" />
+                            </div>
                           </td>
                         </tr>
                       ))}

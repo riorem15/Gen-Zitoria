@@ -1,8 +1,8 @@
 import { useStore } from '../../store/useStore';
-import { Flame, Moon, Sun } from 'lucide-react';
+import { Flame } from 'lucide-react';
 
 export default function Header() {
-  const { streak, user, isDarkMode, toggleTheme } = useStore();
+  const { streak, user } = useStore();
 
   return (
     <>
@@ -26,14 +26,6 @@ export default function Header() {
             </div>
           )}
           
-          {/* Theme Toggle */}
-          <button 
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-surface-variant/50 hover:bg-surface-variant text-on-surface transition-colors border border-glass-border shadow-sm"
-          >
-            {isDarkMode ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-700" />}
-          </button>
-          
           {/* Streak Indicator */}
           <div className={`flex items-center gap-1.5 glass-panel px-4 py-2 relative overflow-hidden group ${streak > 0 ? 'ring-1 ring-orange-500/50' : ''}`}>
             {streak >= 5 && (
@@ -56,12 +48,6 @@ export default function Header() {
           </h1>
         </div>
         <div className="flex items-center gap-3">
-          <button 
-            onClick={toggleTheme}
-            className="p-1.5 rounded-full bg-surface-variant/50 text-on-surface transition-colors"
-          >
-            {isDarkMode ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-700" />}
-          </button>
           <div className={`flex items-center gap-1 glass-panel px-3 py-1 ${streak > 0 ? 'ring-1 ring-orange-500/50' : ''}`}>
             <Flame className={`w-4 h-4 ${streak > 0 ? 'text-orange-500 animate-pulse' : 'text-slate-400'}`} />
             <span className={`text-sm font-bold ${streak > 0 ? 'text-orange-500' : 'text-slate-400'}`}>{streak}</span>
